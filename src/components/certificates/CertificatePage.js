@@ -1,11 +1,18 @@
 import React from 'react';
 import {Button} from 'react-bootstrap'
+import { BrowserRouter as Router, withRouter, Link } from "react-router-dom";
+//import Routes from './Router';
 import '../../css/certificates/CertificatePage.css'
 
 class CertificatePage extends React.Component{
 
     constructor(props){
         super(props);
+        this.showAllCertificates = this.showAllCertificates.bind(this);
+      }
+
+      showAllCertificates() {
+        window.location = "http://localhost:3000/allcertificates"
       }
 
       render(){
@@ -16,6 +23,8 @@ class CertificatePage extends React.Component{
               <a className="aCertificate">Review existing certificates</a>
               </div>
           </div>
+
+          
         );
     
       }
