@@ -1,8 +1,9 @@
 import React from 'react'
 import {Route, withRouter, Switch } from "react-router-dom";
 import CertificatePage from './certificates/CertificatePage';
+import AllCertificatesPage from './certificates/AllCertificatesPage';
 
-class Router extends React.Component {
+class Routes extends React.Component {
 
     constructor(props){
         super(props);
@@ -11,12 +12,11 @@ class Router extends React.Component {
     render(){
         return (
             <Switch>
-                <Route>
-                <Route exact path="/"  render={ <CertificatePage/> }/>
-                </Route>
+                <Route path="/"  component={ <CertificatePage></CertificatePage> }/>
+                <Route path="/allcertificates" component={<AllCertificatesPage></AllCertificatesPage>} />
             </Switch>
         );
     }
 }
 
-export default withRouter(Router);
+export default withRouter(Routes);
