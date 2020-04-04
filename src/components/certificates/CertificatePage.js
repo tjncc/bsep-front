@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button} from 'react-bootstrap'
-//import '.../css/certificates/CertificatePage.css'
+import '../../css/certificates/CertificatePage.css'
 
 class CertificatePage extends React.Component{
 
