@@ -9,6 +9,8 @@ import {
   useParams,
   withRouter,
 } from "react-router-dom";
+import back from "../../icons/back.png"
+
 
 
 
@@ -17,6 +19,8 @@ class CreateCertificatePage extends React.Component{
     constructor(props){
         super(props);
         this.showIssuerDataForm = this.showIssuerDataForm.bind(this);
+        this.backToHomepage = this.backToHomepage.bind(this);
+
 
       }
 
@@ -25,11 +29,19 @@ class CreateCertificatePage extends React.Component{
         document.getElementById("accordion").defaultActiveKey= "1";
       }
 
+      backToHomepage() {
+        window.location = "http://localhost:3000/"
+      }
+
 
 
       render(){
         return(
 
+<div>
+  <Button variant="link" className="backButton" onClick={this.backToHomepage}>
+  <img src={back} style={{width:'25px',height:'25px'}}></img>
+  </Button>
 
   <Accordion  id="accordion" defaultActiveKey="0" style={{width:'60%',marginTop:'2%',marginLeft:'20%'}}>
   <Card>
@@ -203,6 +215,7 @@ class CreateCertificatePage extends React.Component{
     </Accordion.Collapse>
   </Card>
 </Accordion>
+</div>
 
 
 
