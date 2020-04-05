@@ -1,0 +1,17 @@
+.AllCertificatesPageBackground{
+
+  background-color: #F5F5F5;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.backButton{
+
+  margin-right: 93%;
+  margin-top: 1.5%;
+  height: 40px;
+  width: 40px;
+  opacity: 0.7;
+
+}

@@ -1,8 +1,17 @@
 import React from 'react';
 import {Button} from 'react-bootstrap'
-import { BrowserRouter as Router, withRouter, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+  useParams
+} from "react-router-dom";
 //import Routes from './Router';
+import AllCertificatesPage from '../certificates/AllCertificatesPage';
 import '../../css/certificates/CertificatePage.css'
+
 
 class CertificatePage extends React.Component{
 
@@ -17,18 +26,24 @@ class CertificatePage extends React.Component{
 
       render(){
         return(
+
+
           <div className="divCertButtons" style={{top:'0', bottom:'0', left:'0', right:'0', position: 'absolute'}}>
               <div className="divCertMiddle">
               <button variant="outline-dark" className="btnSertifikat">Request for a cerificate</button>
-              <a className="aCertificate">Review existing certificates</a>
+
+              <Link className="aCertificate" to="/allcertificates">  Review existing certificates </Link>
+
               </div>
           </div>
 
-          
+
+
+
         );
-    
+
       }
-    
+
 }
 
 export default CertificatePage;

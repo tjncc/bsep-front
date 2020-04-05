@@ -13,7 +13,7 @@ class CertificatesTable extends React.Component {
             certificates: []
         }
 
-        this.renderTableData = this.renderTableData.bind(this);
+        //this.renderTableData = this.renderTableData.bind(this);
     }
 
     componentDidMount() {
