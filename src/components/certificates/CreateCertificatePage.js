@@ -179,6 +179,19 @@ class CreateCertificatePage extends React.Component{
         <label>CRL Sign</label>
         </div>
 
+        <div>
+        <input type="checkbox"></input>
+        &nbsp;
+        <label>Non Repudiation</label>
+        </div>
+
+
+        <div>
+        <input type="checkbox"></input>
+        &nbsp;
+        <label>EncipherOnly, DecipherOnly</label>
+        </div>
+
         </Card>
 
         <Card style={{marginTop:'5%',width:'50%',marginLeft:'5%',marginBottom:'2%'}}>
