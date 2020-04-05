@@ -213,7 +213,7 @@ class CreateCertificatePage extends React.Component{
         </Form.Group>
 
         <Form.Group>
-          <Form.Label>Allias</Form.Label>
+          <Form.Label>Serial number</Form.Label>
           <Form.Control type="text" style={{width:'250px'}} required/>
         </Form.Group>
 
