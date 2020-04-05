@@ -4,8 +4,9 @@ import './App.css';
 import ReactDOM from 'react-dom';
 //import { BrowserRouter as Router,Link } from "react-router-dom";
 import Routes from './components/Router';
-import CertificatePage from './components/certificates/CertificatePage';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import CreateCertificatePage from './components/certificates/CreateCertificatePage';
+import CertificatePage from './components/certificates/CertificatePage';
 import AllCertificatesPage from './components/certificates/AllCertificatesPage';
 
 import {
@@ -38,6 +39,7 @@ export default class App extends React.Component {
       <Switch>
             <Route exact path="/"><CertificatePage/></Route>
             <Route exact path="/allcertificates"><AllCertificatesPage/></Route>
+            <Route exact path="/createcertificate"><CreateCertificatePage/></Route>
       </Switch>
 
 

@@ -18,10 +18,16 @@ class CertificatePage extends React.Component{
     constructor(props){
         super(props);
         this.showAllCertificates = this.showAllCertificates.bind(this);
+        this.createCertificate= this.createCertificate.bind(this);
+
       }
 
       showAllCertificates() {
         window.location = "http://localhost:3000/allcertificates"
+      }
+
+      createCertificate() {
+        window.location = "http://localhost:3000/createcertificate"
       }
 
       render(){
@@ -30,9 +36,12 @@ class CertificatePage extends React.Component{
 
           <div className="divCertButtons" style={{top:'0', bottom:'0', left:'0', right:'0', position: 'absolute'}}>
               <div className="divCertMiddle">
-              <button variant="outline-dark" className="btnSertifikat">Request for a cerificate</button>
+              <button variant="outline-dark" className="btnSertifikat" onClick={this.createCertificate}>
+              Request for a cerificate
+              </button>
 
               <Link className="aCertificate" to="/allcertificates">  Review existing certificates </Link>
+
 
               </div>
           </div>
