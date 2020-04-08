@@ -40,7 +40,8 @@ class CreateCertificatePage extends React.Component {
       subjectType: '',
       allCAs: [],
       issuerIdSerialNumber: '',
-      selectedIssuer: ''
+      selectedIssuer: '',
+      serialNumber: ''
 
     }
 
@@ -48,8 +49,8 @@ class CreateCertificatePage extends React.Component {
   }
 
   validateSubjectFields() {
-    const {commonName, state, city, organization, organizationUnit, email, certificateRole} = this.state;
-    const isEmpty = commonName === "" || state === "" || city === "" || organization === "" || organizationUnit === "" || email === "" || certificateRole === "";
+    const {commonName, state, city, organization, organizationUnit, email, certificateRole, serialNumber} = this.state;
+    const isEmpty = serialNumber === "" || commonName === "" || state === "" || city === "" || organization === "" || organizationUnit === "" || email === "" || certificateRole === "";
     
     if (!isEmpty || !this.state.selectedIssuer == "") {
 
@@ -117,7 +118,7 @@ renderCommonNames(){
   return(
       this.state.allCAs.map(dto => {
           return(
-              <option value={dto.serialNumber}>{dto.commonName + " " + dto.IssuerIdSerialNumber}</option>
+              <option value={dto.serialNumber}>{dto.commonName + " " + dto.serialNumber}</option>
           )
       })
   )
@@ -312,12 +313,12 @@ renderCommonNames(){
                     <Form style={{ textAlign: 'left', width: '50%', marginLeft: '5%', marginTop: '5%' }}>
                       <Form.Group>
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" style={{ width: '250px' }} required />
+                        <Form.Control handleChange={this.handleChange} type="password" name="password" style={{ width: '250px' }} required />
                       </Form.Group>
 
                       <Form.Group>
                         <Form.Label>Serial number</Form.Label>
-                        <Form.Control type="text" style={{ width: '250px' }} required />
+                        <Form.Control handleChange={this.handleChange} name="serialNumber" type="text" style={{ width: '250px' }} required />
                       </Form.Group>
 
                     </Form>
