@@ -27,7 +27,7 @@
 }
 
 .aCertificate:hover{
-    color: rgb(216, 199, 199);
+    color: rgb(31, 31, 31);
     cursor: pointer;
     text-decoration: underline;
     background-color: rgba(231, 231, 233, 0.3);
