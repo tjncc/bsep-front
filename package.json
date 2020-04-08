@@ -14,7 +14,10 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
-    "react-table-6": "^6.11.0"
+    "react-table-6": "^6.11.0",
+    "select": "^1.1.2",
+    "sweetalert2": "^9.10.9",
+    "sweetalert2-react-content": "^3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
