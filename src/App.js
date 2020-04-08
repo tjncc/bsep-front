@@ -28,6 +28,11 @@ export default class App extends React.Component {
 
     }
 
+    axios.get('http://localhost:8081/api/certificates/generateroot').then(
+              (resp) => { alert("jndsndj") }  ,
+              (resp) => {alert("Something went wrong, please try again.")}
+              );
+
 
   }
 
