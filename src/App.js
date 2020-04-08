@@ -2,6 +2,7 @@ import React from 'react';
 //import logo from './logo.svg';
 import './App.css';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 //import { BrowserRouter as Router,Link } from "react-router-dom";
 import Routes from './components/Router';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -26,6 +27,8 @@ export default class App extends React.Component {
     this.state = {
 
     }
+
+
   }
 
 
