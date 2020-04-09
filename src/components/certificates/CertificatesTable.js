@@ -11,19 +11,18 @@ class CertificatesTable extends React.Component {
     constructor(props) {
         super(props);
 
-        axios.get('http://localhost:8081/api/certificates/all').then(
-            (resp) => this.onSuccessHandler(resp),
-            (resp) => this.onErrorHandler(resp),
-        );
-
+        
         this.state = {
             certificates: []
         }
     }
 
     componentDidMount() {
-
-        
+        axios.get('http://localhost:8081/api/certificates/all').then(
+            (resp) => this.onSuccessHandler(resp),
+            (resp) => this.onErrorHandler(resp),
+        );
+      
     }
 
     onSuccessHandler(resp) {
@@ -41,14 +40,15 @@ class CertificatesTable extends React.Component {
     render() {
 
         const cert = [];
-        console.log(this.state.certificates)
+        //console.log(this.state.certificates)
+        console.log(this.state.certificates.validFrom);
 
         for(var i = 0; i < this.state.certificates.length; i++) {
             const serialNumber = this.state.certificates.serialNumber;
             const certificateRole = this.state.certificates.certificateRole;
             const certificateStatus = this.state.certificates.certificateStatus;
-            const dateValid = this.state.certificates.dateValid;
-            const dateExpired = this.state.certificates.dateExpired;
+            const validFrom = this.state.certificates.validFrom;
+            const validTo = this.state.certificates.validTo;
 
            
         }
@@ -76,17 +76,17 @@ class CertificatesTable extends React.Component {
                 filterAll: true
             },
             {
-                accessor: "dateValid",
+                accessor: "validFrom",
                 Header: "Date Valid",
                 filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["dateValid"] }),
+                    matchSorter(rows, filter.value, { keys: ["validFrom"] }),
                 filterAll: true
             },
             {
-                accessor: "dateExpired",
+                accessor: "validTo",
                 Header: "Date expired",
                 filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["dateExpired"] }),
+                    matchSorter(rows, filter.value, { keys: ["validTo"] }),
                 filterAll: true
             },
             {
