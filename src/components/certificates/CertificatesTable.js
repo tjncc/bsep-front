@@ -2,6 +2,7 @@ import React from 'react';
 import 'react-table-6/react-table.css';
 import axios from 'axios';
 import matchSorter from 'match-sorter'
+import { Button, Card, Accordion, Form, Dropdown } from 'react-bootstrap'
 import { withRouter } from "react-router-dom";
 var ReactTable = require('react-table-6').default;
 
@@ -87,7 +88,18 @@ class CertificatesTable extends React.Component {
                 filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["dateExpired"] }),
                 filterAll: true
+            },
+            {
+                accessor: "serialNumber",
+                Header: "Download",
+                Cell: ({ row }) => (<Button className="deleteDoctor" variant="outline-success" >Download</Button>)
+            },
+            {
+                accessor: "serialNumber",
+                Header: "Revoke",
+                Cell: ({ row }) => (<Button className="deleteDoctor" variant="outline-danger">Revoke</Button>)
             }
+
         ]
 
         return (
