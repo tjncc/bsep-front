@@ -208,13 +208,6 @@ renderCommonNames(){
 
 
 
-                  <Form.Group>
-                    <Form.Check
-                      type="switch"
-                      id="custom-switch"
-                      label="Self-signed"
-                    />
-                  </Form.Group>
                   <Accordion.Toggle as={Button} variant="outline-dark" eventKey="1" style={{ marginRight: '93%' }} >Next</Accordion.Toggle>
                 </Form>
 
