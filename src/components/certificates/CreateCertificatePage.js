@@ -50,9 +50,9 @@ class CreateCertificatePage extends React.Component {
 
   validateSubjectFields() {
     const {commonName, state, city, organization, organizationUnit, email, certificateRole, serialNumber} = this.state;
-    const isEmpty = serialNumber === "" || commonName === "" || state === "" || city === "" || organization === "" || organizationUnit === "" || email === "" || certificateRole === "";
+    const isEmpty = serialNumber === "" || commonName === "" || state === "" || city === "" || organization === "" || organizationUnit === "" || email === "";
     
-    if (!isEmpty || !this.state.selectedIssuer == "") {
+    if (!isEmpty || !this.state.selectedIssuer === "") {
 
       axios.post("http://localhost:8081/api/certificates/save", this.state).then(
         (resp) => this.onSuccessHandler(resp),
@@ -144,6 +144,7 @@ renderCommonNames(){
 
 
   render() {
+    console.log(this.state)
     
     return (
 
@@ -315,7 +316,7 @@ renderCommonNames(){
 
                       <Form.Group>
                         <Form.Label>Serial number</Form.Label>
-                        <Form.Control handleChange={this.handleChange} name="serialNumber" type="text" style={{ width: '250px' }} required />
+                        <Form.Control onChange={this.handleChange} name="serialNumber" type="text" style={{ width: '250px' }} required />
                       </Form.Group>
 
                     </Form>
