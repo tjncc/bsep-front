@@ -39,7 +39,7 @@ class CreateCertificatePage extends React.Component {
       serialNumber:'',
       certificateRole:'',
       issuerSerialNumber: '',
-      subjectType: '',
+      subjectType: 'CA',
       allCAs: [],
 
     }
@@ -51,7 +51,7 @@ class CreateCertificatePage extends React.Component {
     const {commonName, state, city, organization, issuerSerialNumber, organizationUnit, email, subjectType} = this.state;
     const isEmpty =  commonName === "" || state === "" || city === "" || organization === "" || organizationUnit === "" || email === "" || issuerSerialNumber === "";
 
-    if (!isEmpty || !this.state.issuerSerialNumber === "None" || !this.state.subjectType === "None" || !this.state.issuerSerialNumber === "" || !this.state.subjectType === "") {
+    if (!isEmpty || !this.state.issuerSerialNumber === "None" || !this.state.subjectType === "None" || !this.state.issuerSerialNumber === "") {
 
         console.log(this.state);
 
