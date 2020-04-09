@@ -36,13 +36,11 @@ class CreateCertificatePage extends React.Component {
       email: '',
       organization: '',
       organizationUnit: '',
-      certificateRole: '',
-      IssuerId: '',
+      serialNumber:'',
+      certificateRole:'',
+      IssuerSerialNumber: '',
       subjectType: '',
       allCAs: [],
-      issuerIdSerialNumber: '',
-      selectedIssuer: '',
-      serialNumber: ''
 
     }
 
@@ -50,12 +48,18 @@ class CreateCertificatePage extends React.Component {
   }
 
   validateSubjectFields() {
-    const {commonName, state, city, organization, organizationUnit, email, certificateRole, serialNumber, subjectType} = this.state;
-    const isEmpty = serialNumber === "" || commonName === "" || state === "" || city === "" || organization === "" || organizationUnit === "" || email === "";
-    
-    if (!isEmpty || !this.state.selectedIssuer === "None" || !this.state.subjectType === "None" || !this.state.selectedIssuer === "" || !this.state.subjectType === "") {
+    const {commonName, state, city, organization, IssuerSerialNumber, organizationUnit, email, subjectType} = this.state;
+    const isEmpty =  commonName === "" || state === "" || city === "" || organization === "" || organizationUnit === "" || email === "" || IssuerSerialNumber === "";
 
-      axios.post("http://localhost:8081/api/certificates/save", this.state).then(
+    if (!isEmpty || !this.state.IssuerSerialNumber === "None" || !this.state.subjectType === "None" || !this.state.IssuerSerialNumber === "" || !this.state.subjectType === "") {
+
+        console.log(this.state);
+
+        var object = {commonName: this.state.commonName, state: this.state.state, city: this.state.city,
+        email: this.state.email, organization: this.state.organization, organizationUnit :  this.state.organizationUnit,
+        IssuerSerialNumber: this.state.IssuerSerialNumber, subjectType :  this.state.subjectType}
+
+      axios.post("http://localhost:8081/api/certificates/save", object).then(
         (resp) => this.onSuccessHandler(resp),
         (resp) => this.onErrorHandler(resp)
       );
@@ -111,7 +115,7 @@ onSuccessHandler(resp) {
 
   handleSelect(e){
     console.log(e.target.value)
-    this.setState({selectedIssuer : e.target.value})
+    this.setState({IssuerSerialNumber : e.target.value})
 
 }
 
@@ -124,6 +128,7 @@ handleSelectSubjectType(e){
 renderCommonNames(){
   return(
       this.state.allCAs.map(dto => {
+        console.log(dto);
           return(
               <option value={dto.serialNumber}>{dto.commonName + " " + dto.serialNumber}</option>
           )
@@ -152,7 +157,7 @@ renderCommonNames(){
 
   render() {
     console.log(this.state)
-    
+
     return (
 
       <div>
@@ -210,7 +215,7 @@ renderCommonNames(){
                       label="Self-signed"
                     />
                   </Form.Group>
-                  <Button as={Accordion.Toggle} variant="outline-dark" eventKey="1" style={{ marginRight: '93%' }} type="submit" >Next</Button>
+                  <Accordion.Toggle as={Button} variant="outline-dark" eventKey="1" style={{ marginRight: '93%' }} >Next</Accordion.Toggle>
                 </Form>
 
               </Card.Body>
@@ -306,22 +311,14 @@ renderCommonNames(){
 
                   </Card>
 
-                  <Card style={{ marginTop: '5%', width: '50%', marginLeft: '5%', marginBottom: '2%' }}>
+                  <Card style={{ marginTop: '5%', width: '50%', marginLeft: '5%', marginBottom: '2%' ,padding:'15px'}}>
                   <Card.Title>Subject Type:</Card.Title>
                   <select className="selectD" defaultValue="None" onChange={this.handleSelectSubjectType}>
                     <option value="CA">CA</option>
-                    <option value="endentity">End-Entity</option>
+                    <option value="ENDENTITY">End-Entity</option>
                   </select>
 
-                    <Form style={{ textAlign: 'left', width: '50%', marginLeft: '5%', marginTop: '5%' }}>
-                     
 
-                      <Form.Group>
-                        <Form.Label>Serial number</Form.Label>
-                        <Form.Control onChange={this.handleChange} name="serialNumber" type="text" style={{ width: '250px' }} required />
-                      </Form.Group>
-
-                    </Form>
 
                   </Card>
 
