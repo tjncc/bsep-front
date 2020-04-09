@@ -1,5 +1,6 @@
 import React from 'react';
 import 'react-table-6/react-table.css';
+import axios from 'axios';
 import matchSorter from 'match-sorter'
 import { withRouter } from "react-router-dom";
 var ReactTable = require('react-table-6').default;
@@ -9,19 +10,19 @@ class CertificatesTable extends React.Component {
     constructor(props) {
         super(props);
 
+        axios.get('http://localhost:8081/api/certificates/all').then(
+            (resp) => this.onSuccessHandler(resp),
+            (resp) => this.onErrorHandler(resp),
+        );
+
         this.state = {
             certificates: []
         }
-
-        //this.renderTableData = this.renderTableData.bind(this);
     }
 
     componentDidMount() {
 
-        /*axios.get('http://localhost:8081/api/certificates/all').then(
-            (resp) => this.onSuccessHandler(resp),
-            (resp) => this.onErrorHandler(resp),
-        );*/
+        
     }
 
     onSuccessHandler(resp) {
@@ -32,45 +33,45 @@ class CertificatesTable extends React.Component {
 
     }
 
-    onErrorHandlerRoom(response) {
+    onErrorHandler(response) {
         alert("Error response: Uncovered case");
     }
 
     render() {
 
         const cert = [];
+        console.log(this.state.certificates)
 
         for(var i = 0; i < this.state.certificates.length; i++) {
-            const name = this.state.certificates.name;
-            const issuer = this.state.certificates.issuer;
-            const subject = this.state.certificates.subject;
+            const serialNumber = this.state.certificates.serialNumber;
+            const certificateRole = this.state.certificates.certificateRole;
+            const certificateStatus = this.state.certificates.certificateStatus;
             const dateValid = this.state.certificates.dateValid;
             const dateExpired = this.state.certificates.dateExpired;
 
-            {cert.push({name: name, issuer: issuer, subject: subject, dateValid: dateValid, dateExpired: dateExpired})}
-
+           
         }
 
         const columns = [
             {
-                accessor: "name",
-                Header: "Name",
+                accessor: "serialNumber",
+                Header: "Serial Number",
                 filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["name"] }),
+                    matchSorter(rows, filter.value, { keys: ["serialNumber"] }),
                 filterAll: true
             },
             {
-                accessor: "issuer",
-                Header: "Issuer",
+                accessor: "certificateRole",
+                Header: "Certificate Role",
                 filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["issuer"] }),
+                    matchSorter(rows, filter.value, { keys: ["certificateRole"] }),
                 filterAll: true
             },
             {
-                accessor: "subject",
-                Header: "Subject",
+                accessor: "certificateStatus",
+                Header: "Certificate Status",
                 filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["subject"] }),
+                    matchSorter(rows, filter.value, { keys: ["certificateStatus"] }),
                 filterAll: true
             },
             {
@@ -93,7 +94,7 @@ class CertificatesTable extends React.Component {
             <div>
                 <br/>
                 <br/>
-                <ReactTable data={cert} columns={columns}
+                <ReactTable data={this.state.certificates} columns={columns}
                     minRows={0}
                     showPagination={false}
                     filterable
