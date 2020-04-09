@@ -38,7 +38,7 @@ class CreateCertificatePage extends React.Component {
       organizationUnit: '',
       serialNumber:'',
       certificateRole:'',
-      IssuerSerialNumber: '',
+      issuerSerialNumber: '',
       subjectType: '',
       allCAs: [],
 
@@ -48,16 +48,16 @@ class CreateCertificatePage extends React.Component {
   }
 
   validateSubjectFields() {
-    const {commonName, state, city, organization, IssuerSerialNumber, organizationUnit, email, subjectType} = this.state;
-    const isEmpty =  commonName === "" || state === "" || city === "" || organization === "" || organizationUnit === "" || email === "" || IssuerSerialNumber === "";
+    const {commonName, state, city, organization, issuerSerialNumber, organizationUnit, email, subjectType} = this.state;
+    const isEmpty =  commonName === "" || state === "" || city === "" || organization === "" || organizationUnit === "" || email === "" || issuerSerialNumber === "";
 
-    if (!isEmpty || !this.state.IssuerSerialNumber === "None" || !this.state.subjectType === "None" || !this.state.IssuerSerialNumber === "" || !this.state.subjectType === "") {
+    if (!isEmpty || !this.state.issuerSerialNumber === "None" || !this.state.subjectType === "None" || !this.state.issuerSerialNumber === "" || !this.state.subjectType === "") {
 
         console.log(this.state);
 
         var object = {commonName: this.state.commonName, state: this.state.state, city: this.state.city,
         email: this.state.email, organization: this.state.organization, organizationUnit :  this.state.organizationUnit,
-        IssuerSerialNumber: this.state.IssuerSerialNumber, subjectType :  this.state.subjectType}
+        issuerSerialNumber: this.state.issuerSerialNumber, subjectType :  this.state.subjectType}
 
       axios.post("http://localhost:8081/api/certificates/save", object).then(
         (resp) => this.onSuccessHandler(resp),
@@ -115,7 +115,7 @@ onSuccessHandler(resp) {
 
   handleSelect(e){
     console.log(e.target.value)
-    this.setState({IssuerSerialNumber : e.target.value})
+    this.setState({issuerSerialNumber : e.target.value})
 
 }
 
