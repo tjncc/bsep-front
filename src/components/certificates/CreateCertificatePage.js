@@ -24,6 +24,7 @@ class CreateCertificatePage extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.validateSubjectFields = this.validateSubjectFields.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
+    this.handleSelectSubjectType = this.handleSelectSubjectType.bind(this);
     this.renderCommonNames = this.renderCommonNames.bind(this);
 
 
@@ -49,10 +50,10 @@ class CreateCertificatePage extends React.Component {
   }
 
   validateSubjectFields() {
-    const {commonName, state, city, organization, organizationUnit, email, certificateRole, serialNumber} = this.state;
+    const {commonName, state, city, organization, organizationUnit, email, certificateRole, serialNumber, subjectType} = this.state;
     const isEmpty = serialNumber === "" || commonName === "" || state === "" || city === "" || organization === "" || organizationUnit === "" || email === "";
     
-    if (!isEmpty || !this.state.selectedIssuer === "") {
+    if (!isEmpty || !this.state.selectedIssuer === "None" || !this.state.subjectType === "None" || !this.state.selectedIssuer === "" || !this.state.subjectType === "") {
 
       axios.post("http://localhost:8081/api/certificates/save", this.state).then(
         (resp) => this.onSuccessHandler(resp),
@@ -111,6 +112,12 @@ onSuccessHandler(resp) {
   handleSelect(e){
     console.log(e.target.value)
     this.setState({selectedIssuer : e.target.value})
+
+}
+
+handleSelectSubjectType(e){
+  console.log(e.target.value)
+  this.setState({subjectType : e.target.value})
 
 }
 
@@ -300,16 +307,11 @@ renderCommonNames(){
                   </Card>
 
                   <Card style={{ marginTop: '5%', width: '50%', marginLeft: '5%', marginBottom: '2%' }}>
-                    <Dropdown style={{ textAlign: 'left', width: '50%', marginLeft: '5%', marginTop: '2%' }}>
-                      <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
-                        Subject Type
-        </Dropdown.Toggle>
-
-                      <Dropdown.Menu>
-                        <Dropdown.Item href="#/action-1">CA</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">End entity</Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown>
+                  <Card.Title>Subject Type:</Card.Title>
+                  <select className="selectD" defaultValue="None" onChange={this.handleSelectSubjectType}>
+                    <option value="CA">CA</option>
+                    <option value="endentity">End-Entity</option>
+                  </select>
 
                     <Form style={{ textAlign: 'left', width: '50%', marginLeft: '5%', marginTop: '5%' }}>
                      
