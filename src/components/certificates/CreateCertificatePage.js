@@ -98,6 +98,7 @@ onSuccessHandler(resp) {
         type: 'success',
         icon: 'success'
       });
+      window.location = "http://localhost:3000"
 }
 
   showIssuerDataForm() {
