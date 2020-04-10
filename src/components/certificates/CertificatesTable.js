@@ -4,8 +4,12 @@ import axios from 'axios';
 import matchSorter from 'match-sorter'
 import { Button, Card, Accordion, Form, Dropdown } from 'react-bootstrap'
 import { withRouter } from "react-router-dom";
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
 var ReactTable = require('react-table-6').default;
 
+const Alert = withReactContent(Swal)
 class CertificatesTable extends React.Component {
 
     constructor(props) {
@@ -51,12 +55,28 @@ class CertificatesTable extends React.Component {
        console.log(resp.data.serialNumber);
     }
 
+    download(certificate){
+        axios.post(`http://localhost:8081/api/certificates/download`, certificate).then(
+            (resp) => this.onSuccessHandlerDownload(resp),
+            (resp) => this.onErrorHandler(resp)
+        );
+    }
+
+    onSuccessHandlerDownload(resp){
+        Alert.fire({
+            title: "Certificate is downloaded",
+            text: "",
+            type: 'success',
+            icon: 'success'
+          });
+    }
+
 
     render() {
 
         const cert = [];
         //console.log(this.state.certificates)
-        console.log(this.state.certificates.validFrom);
+        //console.log(this.state.certificates.validFrom);
 
         for(var i = 0; i < this.state.certificates.length; i++) {
             const serialNumber = this.state.certificates.serialNumber;
@@ -92,7 +112,7 @@ class CertificatesTable extends React.Component {
             },
             {
                 accessor: "validFrom",
-                Header: "Date Valid",
+                Header: "Valid from",
                 filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["validFrom"] }),
                 filterAll: true
@@ -107,7 +127,7 @@ class CertificatesTable extends React.Component {
             {
                 accessor: "serialNumber",
                 Header: "Download",
-                Cell: ({ row }) => (<Button className="deleteDoctor" variant="outline-success" >Download</Button>)
+                Cell: ({ row }) => (<Button className="deleteDoctor" onClick={this.download.bind(this, row)} variant="outline-success" >Download</Button>)
             },
             {
                 accessor: "serialNumber",

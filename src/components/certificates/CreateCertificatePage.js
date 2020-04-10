@@ -90,7 +90,7 @@ class CreateCertificatePage extends React.Component {
 
 onSuccessHandler(resp) {
 
-  console.log(this.state);
+  //console.log(this.state);
 
     SubjectValidationAlert.fire({
         title: "Certificate issued",
