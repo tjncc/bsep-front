@@ -37,6 +37,21 @@ class CertificatesTable extends React.Component {
         alert("Error response: Uncovered case");
     }
 
+    revokeCertificate(certificate) {
+
+         axios.post("http://localhost:8081/api/certificates/revoke", certificate).then(
+             (resp) => this.onSuccessHandlerRevoke(resp),
+             (resp) => this.onErrorHandler(resp)
+         );
+    }
+
+    onSuccessHandlerRevoke(resp) {
+
+       alert("revoked");
+       console.log(resp.data.serialNumber);
+    }
+
+
     render() {
 
         const cert = [];
@@ -97,7 +112,7 @@ class CertificatesTable extends React.Component {
             {
                 accessor: "serialNumber",
                 Header: "Revoke",
-                Cell: ({ row }) => (<Button className="deleteDoctor" variant="outline-danger">Revoke</Button>)
+                Cell: ({ row }) => (<Button className="revokeCert" onClick={this.revokeCertificate.bind(this, row)} variant="outline-danger">Revoke</Button>)
             }
 
         ]
