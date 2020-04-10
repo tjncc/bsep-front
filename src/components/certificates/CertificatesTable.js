@@ -78,15 +78,24 @@ class CertificatesTable extends React.Component {
         //console.log(this.state.certificates)
         //console.log(this.state.certificates.validFrom);
 
-        for(var i = 0; i < this.state.certificates.length; i++) {
-            const serialNumber = this.state.certificates.serialNumber;
-            const certificateRole = this.state.certificates.certificateRole;
-            const certificateStatus = this.state.certificates.certificateStatus;
-            const validFrom = this.state.certificates.validFrom;
-            const validTo = this.state.certificates.validTo;
+        for(var i = 0; i < this.props.content.length; i++) {
+            const serialNumber = this.props.content[i].serialNumber;
+            const certificateRole = this.props.content[i].certificateRole;
+            const certificateStatus = this.props.content[i].certificateStatus;
+            const startdate = this.props.content[i].validFrom;
+            const enddate = this.props.content[i].validTo;
 
+            console.log(serialNumber)
+
+            const validFrom = startdate[0] + "/" + startdate[1] + "/" + startdate[2];
+            console.log(validFrom);
+            const validTo = enddate[0] + "/" + enddate[1] + "/" + enddate[2];
+
+            { cert.push({ serialNumber: serialNumber, certificateRole: certificateRole, certificateStatus: certificateStatus, validFrom: validFrom, validTo: validTo}); }
            
         }
+
+        console.log(cert);
 
         const columns = [
             {
@@ -141,7 +150,7 @@ class CertificatesTable extends React.Component {
             <div>
                 <br/>
                 <br/>
-                <ReactTable data={this.state.certificates} columns={columns}
+                <ReactTable data={cert} columns={columns}
                     minRows={0}
                     showPagination={false}
                     filterable

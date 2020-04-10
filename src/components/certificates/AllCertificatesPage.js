@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import CertificatesTable from './CertificatesTable';
 import { withRouter } from "react-router-dom";
 import '../../css/certificates/AllCertificatesPage.css'
@@ -10,8 +11,34 @@ class AllCertificatesPage extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            certificates: []
+        }
+
         this.backToHomepage = this.backToHomepage.bind(this);
+
+        axios.get("http://localhost:8081/api/certificates/all").then(
+            (resp) => this.onSuccessHandler(resp),
+            (resp) => this.onErrorHandler(resp)
+        );
     }
+
+    onSuccessHandler(resp) {
+        var temp = [];
+
+        for (var i = 0; i < resp.data.length; i++) {
+            temp.push(resp.data[i]);
+        }
+        this.setState({
+            certificates: temp
+        });
+
+    }
+
+    onErrorHandler(response) {
+        alert("Error response: Uncovered case");
+    }
+
 
     backToHomepage() {
       window.location = "http://localhost:3000/"
@@ -27,7 +54,7 @@ class AllCertificatesPage extends React.Component {
                 </Button>
 
                 <div style={{width:'70%',marginLeft:'15%'}}>
-                <CertificatesTable></CertificatesTable>
+                <CertificatesTable content={this.state.certificates}/>
                 </div>
 
             </div>

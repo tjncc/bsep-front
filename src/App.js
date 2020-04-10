@@ -9,6 +9,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import CreateCertificatePage from './components/certificates/CreateCertificatePage';
 import CertificatePage from './components/certificates/CertificatePage';
 import AllCertificatesPage from './components/certificates/AllCertificatesPage';
+import CreateNewRootPage from './components/certificates/CreateNewRootPage';
+
 
 import {
   BrowserRouter as Router,
@@ -41,6 +43,8 @@ export default class App extends React.Component {
             <Route exact path="/"><CertificatePage/></Route>
             <Route exact path="/allcertificates"><AllCertificatesPage/></Route>
             <Route exact path="/createcertificate"><CreateCertificatePage/></Route>
+            <Route exact path="/createroot"><CreateNewRootPage/></Route>
+
       </Switch>
 
 

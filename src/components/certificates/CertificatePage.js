@@ -9,6 +9,7 @@ import {
   useParams
 } from "react-router-dom";
 //import Routes from './Router';
+import axios from 'axios';
 import AllCertificatesPage from '../certificates/AllCertificatesPage';
 import '../../css/certificates/CertificatePage.css'
 
@@ -19,6 +20,11 @@ class CertificatePage extends React.Component{
         super(props);
         this.showAllCertificates = this.showAllCertificates.bind(this);
         this.createCertificate= this.createCertificate.bind(this);
+
+        axios.get("http://localhost:8081/api/certificates/checkroot").then(
+          (resp) => { window.location = "http://localhost:3000/createroot" },
+          (resp) => {}
+        );
 
       }
 
