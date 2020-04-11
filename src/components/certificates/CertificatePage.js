@@ -46,7 +46,8 @@ class CertificatePage extends React.Component{
               Request for a cerificate
               </button>
 
-              <Link className="aCertificate" to="/allcertificates">  Review existing certificates </Link>
+              <Link className="aCertificate" to="/allcertificates">  Valid certificates </Link>
+              <Link className="aRCertificate" to="/revoked">  Review revoked </Link>
 
 
               </div>
