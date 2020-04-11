@@ -15,7 +15,7 @@ class RevokedCertsTable extends React.Component {
     constructor(props) {
         super(props);
 
-        
+
         this.state = {
             certificates: []
         }
@@ -26,7 +26,7 @@ class RevokedCertsTable extends React.Component {
             (resp) => this.onSuccessHandler(resp),
             (resp) => this.onErrorHandler(resp),
         );
-      
+
     }
 
     onSuccessHandler(resp) {
@@ -50,7 +50,7 @@ class RevokedCertsTable extends React.Component {
             const certificateRole = this.props.content[i].certificateRole;
 
             { cert.push({ serialNumber: serialNumber, certificateRole: certificateRole}); }
-           
+
         }
 
         const columns = [
@@ -79,6 +79,7 @@ class RevokedCertsTable extends React.Component {
                     minRows={0}
                     showPagination={false}
                     filterable
+                    style={{backgroundColor: 'rgba(255,255,255,1)'}}
                     defaultFilterMethod={(filter, row) =>
                         String(row[filter.id]) === filter.value}
                     onFilteredChange={(filtered, column, value) => {

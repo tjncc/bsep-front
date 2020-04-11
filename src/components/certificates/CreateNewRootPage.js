@@ -15,6 +15,8 @@ import withReactContent from 'sweetalert2-react-content';
 import roots from "../../icons/roots.png"
 import back from "../../icons/back.png"
 import tips from "../../icons/tips.png"
+import '../../css/certificates/CreateNewRootPage.css'
+
 
 
 const SubjectValidationAlert = withReactContent(Swal)
@@ -151,66 +153,66 @@ handleSelectSubjectType(e){
 
     return (
 
-      <div>
+      <div  className="background" style={{top:'0', bottom:'0', left:'0', right:'0', position: 'absolute',height:'100%'}}>
         <Button variant="link" className="backButton" onClick={this.backToHomepage}>
           <img src={back} style={{ width: '25px', height: '25px' }}></img>
         </Button>
 
         <Accordion id="accordion" defaultActiveKey="0" style={{ width: '60%', marginTop: '2%', marginLeft: '20%' }}>
-          <Card>
+          <Card style={{backgroundColor: 'rgba(61, 58, 58, 0.6)'}}>
             <Card.Header>
-              <Accordion.Toggle as={Button} variant="outline-dark" eventKey="0" style={{ width: '25%' }}>
+              <Accordion.Toggle as={Button} variant="light" eventKey="0" style={{ width: '25%' }}>
                 Subject data
               </Accordion.Toggle>
             </Card.Header>
             <Accordion.Collapse eventKey="0">
               <Card.Body>
 
-              <Card>
+              <Card style={{backgroundColor: 'rgba(61, 58, 58, 0.6)'}}>
               <Card.Body>
               <img src={roots} style={{width:'30px',height:'30px',padding:'4px'}}></img>
-              <label>Currently there are no avaliable certificates. You have to fill out a form for creating a new root certificate.</label>
+              <label style={{color:'white'}}>Currently there are no avaliable certificates. You have to fill out a form for creating a new root certificate.</label>
               </Card.Body>
               </Card>
 
                 <Form style={{ textAlign: 'left', width: '50%' }}>
                   <Form.Group>
-                    <Form.Label>Common Name:</Form.Label>
+                    <Form.Label style={{color:'white'}}>Common Name:</Form.Label>
                     <Form.Control placeholder="Enter common name" required name="commonName" onChange={this.handleChange} />
                   </Form.Group>
 
                   <Form.Group >
-                    <Form.Label>Organization</Form.Label>
+                    <Form.Label style={{color:'white'}}>Organization</Form.Label>
                     <Form.Control placeholder="Enter organization" required name="organization" onChange={this.handleChange} />
                   </Form.Group>
 
                   <Form.Group >
-                    <Form.Label>Organization unit</Form.Label>
+                    <Form.Label style={{color:'white'}}>Organization unit</Form.Label>
                     <Form.Control placeholder="Enter organization unit" required name="organizationUnit" onChange={this.handleChange} />
                   </Form.Group>
 
                   <Form.Group >
-                    <Form.Label>City</Form.Label>
+                    <Form.Label style={{color:'white'}}>City</Form.Label>
                     <Form.Control placeholder="Enter city" required name="city" onChange={this.handleChange} />
                   </Form.Group>
 
                   <Form.Group >
-                    <Form.Label>State</Form.Label>
+                    <Form.Label style={{color:'white'}}>State</Form.Label>
                     <Form.Control placeholder="Enter state" name="state" onChange={this.handleChange} required />
                   </Form.Group>
 
                   <Form.Group >
-                    <Form.Label>Email</Form.Label>
+                    <Form.Label style={{color:'white'}}>Email</Form.Label>
                     <Form.Control placeholder="Enter email" type="email" name="email" onChange={this.handleChange} required />
                   </Form.Group>
 
-                  <Card >
+                  <Card style={{backgroundColor: 'rgba(61, 58, 58, 0.6)'}} >
                   <Card.Body>
                   <img src={tips} style={{width:'30px',height:'30px',padding:'4px'}}></img>
-                  <label>Because this is a root certificate only subject data is needed.</label>
+                  <label style={{color:'white'}}>Because this is a root certificate only subject data is needed.</label>
                   </Card.Body>
                   </Card>
-                  <Accordion.Toggle as={Button} variant="outline-dark" eventKey="1" style={{ marginRight: '93%',width:'200px',marginTop:'12px' }} onClick={this.validateSubjectFields} >Issue root certificate</Accordion.Toggle>
+                  <Accordion.Toggle as={Button} variant="light" eventKey="1" style={{ marginRight: '93%',width:'200px',marginTop:'12px' }} onClick={this.validateSubjectFields} >Issue root certificate</Accordion.Toggle>
                 </Form>
 
               </Card.Body>

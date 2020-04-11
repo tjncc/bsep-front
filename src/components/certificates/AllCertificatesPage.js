@@ -47,7 +47,7 @@ class AllCertificatesPage extends React.Component {
 
     render() {
         return (
-            <div className="AllCertificatesPageBackground"style={{top:'0', bottom:'0', left:'0', right:'0', position: 'absolute'}}>
+            <div className="AllCertificatesPageBackground" style={{top:'0', bottom:'0', left:'0', right:'0', position: 'absolute'}}>
 
                 <Button variant="link" className="backButton" onClick={this.backToHomepage}>
                 <img src={back} style={{width:'25px',height:'25px'}}></img>
