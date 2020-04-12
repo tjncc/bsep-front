@@ -52,7 +52,7 @@ class CertificatesTable extends React.Component {
     onSuccessHandlerRevoke(resp) {
 
        alert("revoked");
-       console.log(resp.data.serialNumber);
+       //console.log(resp.data.serialNumber);
     }
 
     download(certificate){
