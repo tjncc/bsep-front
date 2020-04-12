@@ -6,6 +6,7 @@ import { Button, Card, Accordion, Form, Dropdown } from 'react-bootstrap'
 import { withRouter } from "react-router-dom";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import '../../css/certificates/AllCertificatesPage.css'
 
 var ReactTable = require('react-table-6').default;
 
@@ -79,7 +80,7 @@ class RevokedCertsTable extends React.Component {
                     minRows={0}
                     showPagination={false}
                     filterable
-                    style={{backgroundColor: 'rgba(255,255,255,1)'}}
+                    className="table"
                     defaultFilterMethod={(filter, row) =>
                         String(row[filter.id]) === filter.value}
                     onFilteredChange={(filtered, column, value) => {
