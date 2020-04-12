@@ -20,6 +20,7 @@ import {
   useRouteMatch,
   useParams
 } from "react-router-dom";
+import RevokedCertificates from './components/certificates/RevokedCertificates';
 
 export default class App extends React.Component {
 
@@ -44,6 +45,7 @@ export default class App extends React.Component {
             <Route exact path="/allcertificates"><AllCertificatesPage/></Route>
             <Route exact path="/createcertificate"><CreateCertificatePage/></Route>
             <Route exact path="/createroot"><CreateNewRootPage/></Route>
+            <Route exact path="/revoked"><RevokedCertificates></RevokedCertificates></Route>
 
       </Switch>
 

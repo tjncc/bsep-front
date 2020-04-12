@@ -13,6 +13,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import back from "../../icons/back.png"
+import '../../css/certificates/CreateCertificate.css'
 
 const SubjectValidationAlert = withReactContent(Swal)
 class CreateCertificatePage extends React.Component {
@@ -131,7 +132,7 @@ renderCommonNames(){
       this.state.allCAs.map(dto => {
         console.log(dto);
           return(
-              <option value={dto.serialNumber}>{dto.commonName + " " + dto.serialNumber}</option>
+              <option style={{color:'white'}} value={dto.serialNumber}>{dto.commonName + " " + dto.serialNumber}</option>
           )
       })
   )
@@ -161,15 +162,15 @@ renderCommonNames(){
 
     return (
 
-      <div>
+      <div className="background" style={{top:'0', bottom:'0', left:'0', right:'0', position: 'absolute'}}>
         <Button variant="link" className="backButton" onClick={this.backToHomepage}>
           <img src={back} style={{ width: '25px', height: '25px' }}></img>
         </Button>
 
-        <Accordion id="accordion" defaultActiveKey="0" style={{ width: '60%', marginTop: '2%', marginLeft: '20%' }}>
-          <Card>
+        <Accordion  id="accordion" defaultActiveKey="0" style={{ width: '60%', marginTop: '2%', marginLeft: '20%'}}>
+          <Card style={{backgroundColor: 'rgba(61, 58, 58, 0.6)'}}>
             <Card.Header>
-              <Accordion.Toggle as={Button} variant="outline-dark" eventKey="0" style={{ width: '25%' }}>
+              <Accordion.Toggle as={Button} variant="light" eventKey="0" style={{ width: '25%' }}>
                 Subject data
               </Accordion.Toggle>
             </Card.Header>
@@ -178,55 +179,55 @@ renderCommonNames(){
 
                 <Form style={{ textAlign: 'left', width: '50%' }}>
                   <Form.Group>
-                    <Form.Label>Common Name:</Form.Label>
+                    <Form.Label style={{color:'white'}}>Common Name:</Form.Label>
                     <Form.Control placeholder="Enter common name" required name="commonName" onChange={this.handleChange} />
                   </Form.Group>
 
                   <Form.Group >
-                    <Form.Label>Organization</Form.Label>
+                    <Form.Label style={{color:'white'}}>Organization</Form.Label>
                     <Form.Control placeholder="Enter organization" required name="organization" onChange={this.handleChange} />
                   </Form.Group>
 
                   <Form.Group >
-                    <Form.Label>Organization unit</Form.Label>
+                    <Form.Label style={{color:'white'}}>Organization unit</Form.Label>
                     <Form.Control placeholder="Enter organization unit" required name="organizationUnit" onChange={this.handleChange} />
                   </Form.Group>
 
                   <Form.Group >
-                    <Form.Label>City</Form.Label>
+                    <Form.Label style={{color:'white'}}>City</Form.Label>
                     <Form.Control placeholder="Enter city" required name="city" onChange={this.handleChange} />
                   </Form.Group>
 
                   <Form.Group >
-                    <Form.Label>State</Form.Label>
+                    <Form.Label style={{color:'white'}}>State</Form.Label>
                     <Form.Control placeholder="Enter state" name="state" onChange={this.handleChange} required />
                   </Form.Group>
 
                   <Form.Group >
-                    <Form.Label>Email</Form.Label>
+                    <Form.Label style={{color:'white'}}>Email</Form.Label>
                     <Form.Control placeholder="Enter email" type="email" name="email" onChange={this.handleChange} required />
                   </Form.Group>
 
 
 
-                  <Accordion.Toggle as={Button} variant="outline-dark" eventKey="1" style={{ marginRight: '93%' }} >Next</Accordion.Toggle>
+                  <Accordion.Toggle as={Button} variant="light" eventKey="1" style={{ marginRight: '93%' }} >Next</Accordion.Toggle>
                 </Form>
 
               </Card.Body>
             </Accordion.Collapse>
           </Card>
 
-          <Card id="issuerForm">
+          <Card id="issuerForm" style={{backgroundColor: 'rgba(61, 58, 58, 0.6)'}}>
             <Card.Header>
-              <Accordion.Toggle as={Button} variant="outline-dark" eventKey="1" style={{ width: '25%' }}>
+              <Accordion.Toggle as={Button} variant="light" eventKey="1" style={{ width: '25%' }}>
                 Issuer data
       </Accordion.Toggle>
             </Card.Header>
             <Accordion.Collapse eventKey="1">
               <Card.Body>
 
-                <Card variant="outline-primary" style={{ padding: '15px' }}>
-                  <label>Currently avaliable CA:</label>
+                <Card variant="outline-primary" style={{ padding: '15px',backgroundColor: 'rgba(61, 58, 58, 0.6)' }}>
+                  <label style={{color:'white'}}>Currently avaliable CA:</label>
                   <select className="selectD" defaultValue="None" onChange={this.handleSelect}>
                     <option value="None">None</option>
                     {this.renderCommonNames()}
@@ -238,78 +239,80 @@ renderCommonNames(){
             </Accordion.Collapse>
           </Card>
 
-          <Card>
+          <Card style={{backgroundColor: 'rgba(61, 58, 58, 0.6)'}}>
             <Card.Header>
-              <Accordion.Toggle as={Button} variant="outline-dark" eventKey="2" style={{ width: '25%' }}>
+              <Accordion.Toggle as={Button} variant="light" eventKey="2" style={{ width: '25%' }}>
                 Other info
               </Accordion.Toggle>
             </Card.Header>
             <Accordion.Collapse eventKey="2">
               <Card.Body>
 
-                <Card>
+                <Card style={{backgroundColor: 'rgba(61, 58, 58, 0.6)'}}>
 
-                  <Card style={{ textAlign: 'left', width: '50%', marginLeft: '5%', marginTop: '2%' }}>
+                  <Card style={{ textAlign: 'left', width: '50%', marginLeft: '5%', marginTop: '2%',backgroundColor: 'rgba(61, 58, 58, 0.6)' }}>
 
-                    <label>Extensions:</label>
-                    <label style={{ marginTop: '2%' }}><b>Key usage</b></label>
+                    <label style={{color:'white'}}>Extensions:</label>
+                    <label style={{ marginTop: '2%',color:'white' }}><b>Key usage</b></label>
 
                     <div>
                       <input type="checkbox"></input>
         &nbsp;
-        <label>Digital Signature</label>
+        <label style={{color:'white'}}>Digital Signature</label>
                     </div>
 
                     <div>
                       <input type="checkbox"></input>
         &nbsp;
-        <label>Key Encipherment </label>
+        <label style={{color:'white'}}>Key Encipherment </label>
                     </div>
 
                     <div>
                       <input type="checkbox"></input>
         &nbsp;
-        <label>Data Encipherment </label>
+        <label style={{color:'white'}}>Data Encipherment </label>
                     </div>
 
                     <div>
                       <input type="checkbox"></input>
         &nbsp;
-        <label>Key Agreement</label>
+        <label style={{color:'white'}}>Key Agreement</label>
                     </div>
 
                     <div>
                       <input type="checkbox"></input>
         &nbsp;
-        <label>Key CertSign</label>
+        <label style={{color:'white'}}>Key CertSign</label>
                     </div>
 
                     <div>
                       <input type="checkbox"></input>
         &nbsp;
-        <label>CRL Sign</label>
+        <label style={{color:'white'}}>CRL Sign</label>
                     </div>
 
                     <div>
                       <input type="checkbox"></input>
         &nbsp;
-        <label>Non Repudiation</label>
+        <label style={{color:'white'}}>Non Repudiation</label>
                     </div>
 
 
                     <div>
                       <input type="checkbox"></input>
         &nbsp;
-        <label>EncipherOnly, DecipherOnly</label>
+        <label style={{color:'white'}}>EncipherOnly, DecipherOnly</label>
                     </div>
 
                   </Card>
 
-                  <Card style={{ marginTop: '5%', width: '50%', marginLeft: '5%', marginBottom: '2%' ,padding:'15px'}}>
-                  <Card.Title>Subject Type:</Card.Title>
+
+
+                  <Card style={{backgroundColor: 'rgba(61, 58, 58, 0.6)', marginTop: '5%', width: '50%', marginLeft: '5%', marginBottom: '2%' ,padding:'15px'}}>
+                  <Card.Title style={{color:'white'}}>Subject Type:</Card.Title>
                   <select className="selectD" defaultValue="None" onChange={this.handleSelectSubjectType}>
                     <option value="CA">CA</option>
-                    <option value="ENDENTITY">End-Entity</option>
+                    <option value="ENDENTITY" >End-Entity</option>
                   </select>
 
 
@@ -318,7 +321,7 @@ renderCommonNames(){
 
                 </Card>
 
-                <Button onClick={this.validateSubjectFields} variant="outline-primary" style={{ marginBottom: '3%', width: '200px', align: 'center', marginTop: '5%' }}>Issue Certificate</Button>
+                <Button onClick={this.validateSubjectFields} variant="light" style={{ marginBottom: '3%', width: '200px', align: 'center', marginTop: '5%' }}>Issue Certificate</Button>
               </Card.Body>
             </Accordion.Collapse>
           </Card>

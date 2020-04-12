@@ -6,6 +6,7 @@ import { Button, Card, Accordion, Form, Dropdown } from 'react-bootstrap'
 import { withRouter } from "react-router-dom";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import '../../css/certificates/AllCertificatesPage.css'
 
 var ReactTable = require('react-table-6').default;
 
@@ -15,7 +16,7 @@ class CertificatesTable extends React.Component {
     constructor(props) {
         super(props);
 
-        
+
         this.state = {
             certificates: []
         }
@@ -26,7 +27,7 @@ class CertificatesTable extends React.Component {
             (resp) => this.onSuccessHandler(resp),
             (resp) => this.onErrorHandler(resp),
         );
-      
+
     }
 
     onSuccessHandler(resp) {
@@ -50,9 +51,13 @@ class CertificatesTable extends React.Component {
     }
 
     onSuccessHandlerRevoke(resp) {
-
-       alert("revoked");
-       //console.log(resp.data.serialNumber);
+        Alert.fire({
+            title: "Certificate is revoked!",
+            text: "",
+            type: 'success',
+            icon: 'success'
+          });
+        window.location.reload();
     }
 
     download(certificate){
@@ -92,7 +97,7 @@ class CertificatesTable extends React.Component {
             const validTo = enddate[0] + "/" + enddate[1] + "/" + enddate[2];
 
             { cert.push({ serialNumber: serialNumber, certificateRole: certificateRole, certificateStatus: certificateStatus, validFrom: validFrom, validTo: validTo}); }
-           
+
         }
 
         console.log(cert);
@@ -154,6 +159,7 @@ class CertificatesTable extends React.Component {
                     minRows={0}
                     showPagination={false}
                     filterable
+                    className="table"
                     defaultFilterMethod={(filter, row) =>
                         String(row[filter.id]) === filter.value}
                     onFilteredChange={(filtered, column, value) => {
