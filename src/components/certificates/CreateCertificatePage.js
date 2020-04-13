@@ -12,7 +12,6 @@ import {
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import back from "../../icons/back.png"
 import '../../css/certificates/CreateCertificate.css'
 
 const SubjectValidationAlert = withReactContent(Swal)
@@ -200,13 +199,13 @@ renderCommonNames(){
 
     return (
 
-      <div className="background" style={{top:'0', bottom:'0', left:'0', right:'0', position: 'absolute'}}>
+      <div style={{backgroundColor: 'rgb(39, 39, 39)', top:'0', bottom:'0', left:'0', right:'0', position: 'absolute'}}>
         <Button variant="link" className="backButton" onClick={this.backToHomepage}>
-          <img src={back} style={{ width: '25px', height: '25px' }}></img>
+
         </Button>
 
         <Accordion  id="accordion" defaultActiveKey="0" style={{ width: '60%', marginTop: '2%', marginLeft: '20%'}}>
-          <Card style={{backgroundColor: 'rgba(61, 58, 58, 0.6)'}}>
+          <Card style={{backgroundColor: 'rgba(99, 107, 110, 0.6)'}}>
             <Card.Header>
               <Accordion.Toggle as={Button} variant="light" eventKey="0" style={{ width: '25%' }}>
                 Subject data
@@ -255,7 +254,7 @@ renderCommonNames(){
             </Accordion.Collapse>
           </Card>
 
-          <Card id="issuerForm" style={{backgroundColor: 'rgba(61, 58, 58, 0.6)'}}>
+          <Card id="issuerForm" style={{backgroundColor: 'rgba(99, 107, 110, 0.6)'}}>
             <Card.Header>
               <Accordion.Toggle as={Button} variant="light" eventKey="1" style={{ width: '25%' }}>
                 Issuer data
@@ -264,7 +263,7 @@ renderCommonNames(){
             <Accordion.Collapse eventKey="1">
               <Card.Body>
 
-                <Card variant="outline-primary" style={{ padding: '15px',backgroundColor: 'rgba(61, 58, 58, 0.6)' }}>
+                <Card variant="outline-primary" style={{ padding: '15px',backgroundColor: 'rgba(99, 107, 110, 0.6)' }}>
                   <label style={{color:'white'}}>Currently avaliable CA:</label>
                   <select className="selectD" defaultValue="None" onChange={this.handleSelect}>
                     <option value="None">None</option>
@@ -277,7 +276,7 @@ renderCommonNames(){
             </Accordion.Collapse>
           </Card>
 
-          <Card style={{backgroundColor: 'rgba(61, 58, 58, 0.6)'}}>
+          <Card style={{backgroundColor: 'rgba(99, 107, 110, 0.6)'}}>
             <Card.Header>
               <Accordion.Toggle as={Button} variant="light" eventKey="2" style={{ width: '25%' }}>
                 Other info
@@ -286,9 +285,9 @@ renderCommonNames(){
             <Accordion.Collapse eventKey="2">
               <Card.Body>
 
-                <Card style={{backgroundColor: 'rgba(61, 58, 58, 0.6)'}}>
+                <Card style={{backgroundColor: 'rgba(99, 107, 110, 0.6)'}}>
 
-                  <Card style={{ textAlign: 'left', width: '50%', marginLeft: '5%', marginTop: '2%',backgroundColor: 'rgba(61, 58, 58, 0.6)' }}>
+                  <Card style={{ textAlign: 'left', width: '50%', marginLeft: '5%', marginTop: '2%',backgroundColor: 'rgba(99, 107, 110, 0.6)', padding: '3px 10px' }}>
 
                     <label style={{color:'white'}}>Extensions:</label>
                     <label style={{ marginTop: '2%',color:'white' }}><b>Key usage</b></label>
@@ -352,7 +351,7 @@ renderCommonNames(){
 
 
 
-                  <Card style={{backgroundColor: 'rgba(61, 58, 58, 0.6)', marginTop: '5%', width: '50%', marginLeft: '5%', marginBottom: '2%' ,padding:'15px'}}>
+                  <Card style={{backgroundColor: 'rgba(99, 107, 110, 0.6)', marginTop: '5%', width: '50%', marginLeft: '5%', marginBottom: '2%' ,padding:'15px'}}>
                   <Card.Title style={{color:'white'}}>Subject Type:</Card.Title>
                   <select className="selectD" defaultValue="None" onChange={this.handleSelectSubjectType}>
                     <option value="CA">CA</option>

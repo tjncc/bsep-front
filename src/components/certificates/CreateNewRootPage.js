@@ -153,7 +153,7 @@ handleSelectSubjectType(e){
 
     return (
 
-      <div  className="background" style={{top:'0', bottom:'0', left:'0', right:'0', position: 'absolute',height:'100%'}}>
+      <div style={{backgroundColor: 'rgb(39, 39, 39)', top:'0', bottom:'0', left:'0', right:'0', position: 'absolute',height:'100%'}}>
         <Button variant="link" className="backButton" onClick={this.backToHomepage}>
           <img src={back} style={{ width: '25px', height: '25px' }}></img>
         </Button>
