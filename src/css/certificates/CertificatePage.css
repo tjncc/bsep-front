@@ -71,3 +71,9 @@
     flex-direction: column;
 
 }
+
+.formCheckA{
+    color: white;
+    font-size: 18px;
+    padding-bottom: 2%;
+}

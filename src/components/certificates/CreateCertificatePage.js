@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, Accordion, Form, Dropdown } from 'react-bootstrap'
+import { Button, Card, Accordion, Form, Dropdown, FormGroup, FormControlLabel } from 'react-bootstrap'
 import {
   BrowserRouter as Router,
   Switch,
@@ -22,6 +22,8 @@ class CreateCertificatePage extends React.Component {
     this.showIssuerDataForm = this.showIssuerDataForm.bind(this);
     this.backToHomepage = this.backToHomepage.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleChangeChecked = this.handleChangeChecked.bind(this);
+    this.handleExtendedChangeChecked = this.handleExtendedChangeChecked.bind(this);
     this.validateSubjectFields = this.validateSubjectFields.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.handleSelectSubjectType = this.handleSelectSubjectType.bind(this);
@@ -56,6 +58,8 @@ class CreateCertificatePage extends React.Component {
       codeSigning:'',
       emailProtection:'',
       timeStamping:'',
+      isCriticalKeyUsage: '',
+      isCriticalExtendedKeyUsage: '',
 
 
     }
@@ -171,7 +175,6 @@ handleKeyUsage(e){
   this.setState({ ...this.state, [e.target.name]: "" });
  }
 
-
 }
 
 handleSelectSubjectType(e){
@@ -190,6 +193,29 @@ renderCommonNames(){
       })
   )
 }
+
+handleChangeChecked(e){
+
+  if(document.getElementsByName(e.target.name)[0].checked === true){
+   this.setState({ ...this.state, [e.target.name]: e.target.value });
+ }else{
+  document.getElementsByName(e.target.name)[0].checked = false;
+  this.setState({ ...this.state, [e.target.name]: "" });
+ }
+
+}
+
+handleExtendedChangeChecked(e){
+
+  if(document.getElementsByName(e.target.name)[0].checked === true){
+   this.setState({ ...this.state, [e.target.name]: e.target.value });
+ }else{
+  document.getElementsByName(e.target.name)[0].checked = false;
+  this.setState({ ...this.state, [e.target.name]: "" });
+ }
+
+}
+
 
 
 
@@ -307,9 +333,16 @@ renderCommonNames(){
 
                   <Card style={{ textAlign: 'left', width: '50%', marginLeft: '5%', marginTop: '2%',backgroundColor: 'rgba(99, 107, 110, 0.6)', padding: '10px 10px' }}>
                     <div style={{padding:'3px 8px', backgroundColor: 'rgb(69, 69, 69)'}}>
-                    <label style={{color:'white'}}>Extensions:</label>
+                    <label style={{color:'white'}}>Extensions: </label>
                     <label style={{ marginTop: '2%',color:'white' }}><b>Key usage</b></label>
-
+                    <Form.Check 
+                        type="switch"
+                        id="custom-switch"
+                        label=" is Critical"
+                        onChange={this.handleChangeChecked}
+                        className="formCheckA"
+                        name="isCriticalKeyUsage"
+                      />
                     <div>
                       <input type="checkbox" name="digitalSignarute" onChange={this.handleKeyUsage}></input>
         &nbsp;
@@ -369,6 +402,15 @@ renderCommonNames(){
                     <div style={{padding:'3px 8px',marginTop:'3%', backgroundColor: 'rgb(69, 69, 69)'}}>
 
                     <label style={{ marginTop: '2%',color:'white' }}><b>Extended Key usage</b></label>
+
+                    <Form.Check 
+                        type="switch"
+                        id="custom-switch2"
+                        label=" is Critical"
+                        onChange={this.handleExtendedChangeChecked}
+                        className="formCheckA"
+                        name="isCriticalExtendedKeyUsage"
+                      />
 
                     <div>
                       <input type="checkbox" name="serverAuth" onChange={this.handleKeyUsage}></input>
