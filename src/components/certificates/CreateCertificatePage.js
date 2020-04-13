@@ -27,6 +27,7 @@ class CreateCertificatePage extends React.Component {
     this.handleSelectSubjectType = this.handleSelectSubjectType.bind(this);
     this.renderCommonNames = this.renderCommonNames.bind(this);
     this.handleKeyUsage = this.handleKeyUsage.bind(this);
+    this.handleSelectTemplate = this.handleSelectTemplate.bind(this);
 
 
     this.state = {
@@ -51,7 +52,7 @@ class CreateCertificatePage extends React.Component {
       nonRepudiation:'',
       encipherOnly:'',
       decipherOnly:'',
-
+      selectedTemplaete: '',
 
     }
 
@@ -159,6 +160,29 @@ handleKeyUsage(e){
 handleSelectSubjectType(e){
   console.log(e.target.value)
   this.setState({subjectType : e.target.value})
+
+}
+
+handleSelectTemplate(e){
+  console.log(e.target.value)
+  console.log(this.state)
+  this.setState({selectedTemplate : e.target.value})
+
+  if(e.target.value === "Template1"){
+    document.getElementsByName("digitalSignature").checked = true;
+    this.setState({digitalSignarute: "On"})
+
+    document.getElementsByName("keyEncipherment").checked = true;
+    this.setState({keyEncipherment: "On"})
+
+
+  } else if(e.target.value === "Template2") {
+
+  } else if(e.target.value === "Template3") {
+
+  } else if(e.target.value === "None") {
+
+  }
 
 }
 
@@ -361,6 +385,18 @@ renderCommonNames(){
 
 
                   </Card>
+
+                  <Card style={{ backgroundColor: 'rgba(99, 107, 110, 0.6)', marginTop: '5%', width: '50%', marginLeft: '5%', marginBottom: '2%', padding: '15px' }}>
+                    <Card.Title style={{ color: 'white' }}>Choose Template:</Card.Title>
+                    <select className="selectD" defaultValue="None" onChange={this.handleSelectTemplate}>
+                      <option value="None">None</option>
+                      <option value="Template1">1</option>
+                      <option value="Template2">2</option>
+                      <option value="Template3">3</option>
+                    </select>
+                  </Card>
+
+                  
 
                 </Card>
 
