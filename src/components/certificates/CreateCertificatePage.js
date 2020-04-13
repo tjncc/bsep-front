@@ -27,6 +27,7 @@ class CreateCertificatePage extends React.Component {
     this.handleSelect = this.handleSelect.bind(this);
     this.handleSelectSubjectType = this.handleSelectSubjectType.bind(this);
     this.renderCommonNames = this.renderCommonNames.bind(this);
+    this.handleKeyUsage = this.handleKeyUsage.bind(this);
 
 
     this.state = {
@@ -42,6 +43,16 @@ class CreateCertificatePage extends React.Component {
       issuerSerialNumber: '',
       subjectType: 'CA',
       allCAs: [],
+      digitalSignarute:'',
+      keyEncipherment:'',
+      dataEnicipherment:'',
+      keyAgreement:'',
+      keyCertSign:'',
+      crlSign:'',
+      nonRepudiation:'',
+      encipherOnly:'',
+      decipherOnly:'',
+
 
     }
 
@@ -56,9 +67,21 @@ class CreateCertificatePage extends React.Component {
 
         console.log(this.state);
 
+        var keyUsageDto = {
+          digitalSignarute: this.state.digitalSignarute,
+          keyEncipherment: this.state.keyEncipherment,
+          dataEnicipherment: this.state.dataEnicipherment,
+          keyAgreement: this.state.keyAgreement,
+          keyCertSign: this.state.keyCertSign,
+          crlSign: this.state.crlSign,
+          nonRepudiation: this.state.nonRepudiation,
+          encipherOnly: this.state.encipherOnly,
+          decipherOnly : this.state.decipherOnly,
+        }
+
         var object = {commonName: this.state.commonName, state: this.state.state, city: this.state.city,
         email: this.state.email, organization: this.state.organization, organizationUnit :  this.state.organizationUnit,
-        issuerSerialNumber: this.state.issuerSerialNumber, subjectType :  this.state.subjectType}
+        issuerSerialNumber: this.state.issuerSerialNumber, subjectType :  this.state.subjectType, keyUsageDto :  keyUsageDto}
 
       axios.post("http://localhost:8081/api/certificates/save", object).then(
         (resp) => this.onSuccessHandler(resp),
@@ -113,11 +136,24 @@ onSuccessHandler(resp) {
 
   handleChange(e) {
     this.setState({ ...this.state, [e.target.name]: e.target.value });
+    console.log(this.state);
   }
 
   handleSelect(e){
     console.log(e.target.value)
     this.setState({issuerSerialNumber : e.target.value})
+
+}
+
+handleKeyUsage(e){
+  console.log(document.getElementsByName(e.target.name));
+  if(document.getElementsByName(e.target.name)[0].checked === true){
+   this.setState({ ...this.state, [e.target.name]: e.target.value });
+ }else{
+  document.getElementsByName(e.target.name)[0].checked = false;
+  this.setState({ ...this.state, [e.target.name]: "" });
+ }
+
 
 }
 
@@ -137,6 +173,8 @@ renderCommonNames(){
       })
   )
 }
+
+
 
 
   componentDidMount() {
@@ -256,52 +294,58 @@ renderCommonNames(){
                     <label style={{ marginTop: '2%',color:'white' }}><b>Key usage</b></label>
 
                     <div>
-                      <input type="checkbox"></input>
+                      <input type="checkbox" name="digitalSignarute" onChange={this.handleKeyUsage}></input>
         &nbsp;
         <label style={{color:'white'}}>Digital Signature</label>
                     </div>
 
                     <div>
-                      <input type="checkbox"></input>
+                      <input type="checkbox" name="nonRepudiation" onChange={this.handleKeyUsage}></input>
+        &nbsp;
+        <label style={{color:'white'}}>Non Repudiation</label>
+                    </div>
+
+                    <div>
+                      <input type="checkbox" name="keyEncipherment" onChange={this.handleKeyUsage}></input>
         &nbsp;
         <label style={{color:'white'}}>Key Encipherment </label>
                     </div>
 
                     <div>
-                      <input type="checkbox"></input>
+                      <input type="checkbox" name="dataEnicipherment" onChange={this.handleKeyUsage} ></input>
         &nbsp;
         <label style={{color:'white'}}>Data Encipherment </label>
                     </div>
 
                     <div>
-                      <input type="checkbox"></input>
+                      <input type="checkbox" name="keyAgreement" onChange={this.handleKeyUsage}></input>
         &nbsp;
         <label style={{color:'white'}}>Key Agreement</label>
                     </div>
 
                     <div>
-                      <input type="checkbox"></input>
+                      <input type="checkbox" name="keyCertSign" onChange={this.handleKeyUsage}></input>
         &nbsp;
         <label style={{color:'white'}}>Key CertSign</label>
                     </div>
 
                     <div>
-                      <input type="checkbox"></input>
+                      <input type="checkbox" name="crlSign" onChange={this.handleKeyUsage}></input>
         &nbsp;
         <label style={{color:'white'}}>CRL Sign</label>
                     </div>
 
+
                     <div>
-                      <input type="checkbox"></input>
+                      <input type="checkbox" name="encipherOnly" onChange={this.handleKeyUsage}></input>
         &nbsp;
-        <label style={{color:'white'}}>Non Repudiation</label>
+        <label style={{color:'white'}}>EncipherOnly</label>
                     </div>
 
-
                     <div>
-                      <input type="checkbox"></input>
+                      <input type="checkbox" name="decipherOnly" onChange={this.handleKeyUsage}></input>
         &nbsp;
-        <label style={{color:'white'}}>EncipherOnly, DecipherOnly</label>
+        <label style={{color:'white'}}>DecipherOnly</label>
                     </div>
 
                   </Card>
