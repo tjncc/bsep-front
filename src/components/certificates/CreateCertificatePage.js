@@ -51,6 +51,11 @@ class CreateCertificatePage extends React.Component {
       nonRepudiation:'',
       encipherOnly:'',
       decipherOnly:'',
+      serverAuth:'',
+      clientAuth:'',
+      codeSigning:'',
+      emailProtection:'',
+      timeStamping:'',
 
 
     }
@@ -78,9 +83,22 @@ class CreateCertificatePage extends React.Component {
           decipherOnly : this.state.decipherOnly,
         }
 
+        var extendedKeyUsageDto = {
+          serverAuth: this.state.serverAuth,
+          clientAuth: this.state.clientAuth,
+          codeSigning: this.state.codeSigning,
+          emailProtection:this.state.emailProtection,
+          timeStamping: this.state.timeStamping,
+        }
+
+        var ExstensionsDto = {
+          keyUsageDto: keyUsageDto,
+          extendedKeyUsageDto : extendedKeyUsageDto,
+        }
+
         var object = {commonName: this.state.commonName, state: this.state.state, city: this.state.city,
         email: this.state.email, organization: this.state.organization, organizationUnit :  this.state.organizationUnit,
-        issuerSerialNumber: this.state.issuerSerialNumber, subjectType :  this.state.subjectType, keyUsageDto :  keyUsageDto}
+        issuerSerialNumber: this.state.issuerSerialNumber, subjectType :  this.state.subjectType, ExstensionsDto: ExstensionsDto}
 
       axios.post("http://localhost:8081/api/certificates/save", object).then(
         (resp) => this.onSuccessHandler(resp),
@@ -288,7 +306,7 @@ renderCommonNames(){
                 <Card style={{backgroundColor: 'rgba(99, 107, 110, 0.6)'}}>
 
                   <Card style={{ textAlign: 'left', width: '50%', marginLeft: '5%', marginTop: '2%',backgroundColor: 'rgba(99, 107, 110, 0.6)', padding: '3px 10px' }}>
-
+                    <div style={{border:'1px solid black',padding:'3px 4px'}}>
                     <label style={{color:'white'}}>Extensions:</label>
                     <label style={{ marginTop: '2%',color:'white' }}><b>Key usage</b></label>
 
@@ -346,10 +364,47 @@ renderCommonNames(){
         &nbsp;
         <label style={{color:'white'}}>DecipherOnly</label>
                     </div>
+                    </div>
+
+                    <div style={{border:'1px solid black',padding:'3px 4px',marginTop:'2%'}}>
+
+                    <label style={{ marginTop: '2%',color:'white' }}><b>Extended Key usage</b></label>
+
+                    <div>
+                      <input type="checkbox" name="serverAuth" onChange={this.handleKeyUsage}></input>
+                      &nbsp;
+                      <label style={{color:'white'}}>ServerAuth</label>
+                    </div>
+
+
+                    <div>
+                      <input type="checkbox" name="clientAuth" onChange={this.handleKeyUsage}></input>
+                            &nbsp;
+                            <label style={{color:'white'}}>clientAuth</label>
+                    </div>
+
+                    <div>
+                      <input type="checkbox" name="codeSigning" onChange={this.handleKeyUsage}></input>
+                          &nbsp;
+                          <label style={{color:'white'}}>codeSigning</label>
+                    </div>
+
+                    <div>
+                      <input type="checkbox" name="emailProtection" onChange={this.handleKeyUsage}></input>
+                          &nbsp;
+                          <label style={{color:'white'}}>emailProtection</label>
+                    </div>
+
+                    <div>
+                      <input type="checkbox" name="timeStamping" onChange={this.handleKeyUsage}></input>
+                          &nbsp;
+                          <label style={{color:'white'}}>timeStamping</label>
+                    </div>
+                    </div>
+
+
 
                   </Card>
-
-
 
                   <Card style={{backgroundColor: 'rgba(99, 107, 110, 0.6)', marginTop: '5%', width: '50%', marginLeft: '5%', marginBottom: '2%' ,padding:'15px'}}>
                   <Card.Title style={{color:'white'}}>Subject Type:</Card.Title>
