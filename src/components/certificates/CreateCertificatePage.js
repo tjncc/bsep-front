@@ -29,6 +29,7 @@ class CreateCertificatePage extends React.Component {
     this.handleSelectSubjectType = this.handleSelectSubjectType.bind(this);
     this.renderCommonNames = this.renderCommonNames.bind(this);
     this.handleKeyUsage = this.handleKeyUsage.bind(this);
+    this.handleSelectTemplate = this.handleSelectTemplate.bind(this);
 
 
     this.state = {
@@ -53,6 +54,7 @@ class CreateCertificatePage extends React.Component {
       nonRepudiation:'',
       encipherOnly:'',
       decipherOnly:'',
+      selectedTemplate: '',
       serverAuth:'',
       clientAuth:'',
       codeSigning:'',
@@ -183,6 +185,67 @@ handleSelectSubjectType(e){
 
 }
 
+handleSelectTemplate(e){
+  console.log(e.target.value)
+  console.log(this.state)
+  this.setState({selectedTemplate : e.target.value})
+  console.log(document.getElementsByName("digitalSignarute")[0]);
+
+  document.getElementsByName("digitalSignarute")[0].checked = false;
+  document.getElementsByName("keyEncipherment")[0].checked = false;
+  document.getElementsByName("nonRepudiation")[0].checked = false;
+  document.getElementsByName("dataEnicipherment")[0].checked = false;
+  document.getElementsByName("keyAgreement")[0].checked = false;
+  document.getElementsByName("keyCertSign")[0].checked = false;
+  document.getElementsByName("crlSign")[0].checked = false;
+  document.getElementsByName("encipherOnly")[0].checked = false;
+  document.getElementsByName("decipherOnly")[0].checked = false;
+
+  this.setState({digitalSignarute: "off",
+              keyEncipherment: "off",
+              nonRepudiation: "off",
+              dataEnicipherment: "off",
+              keyAgreement: "off",
+              keyCertSign: "off",
+              crlSign: "off",
+              encipherOnly: "off",
+              decipherOnly: "off"})
+
+  if(e.target.value === "DigitalAndKeyE"){
+    document.getElementsByName("digitalSignarute")[0].checked = true;
+    this.setState({digitalSignarute: "on"})
+
+    document.getElementsByName("keyEncipherment")[0].checked = true;
+    this.setState({keyEncipherment: "on"})
+
+
+  } else if(e.target.value === "OnlyDigital") {
+    document.getElementsByName("digitalSignarute")[0].checked = true;
+    this.setState({digitalSignarute: "on"})
+
+
+  } else if(e.target.value === "KK") {
+    document.getElementsByName("keyAgreement")[0].checked = true;
+    document.getElementsByName("keyCertSign")[0].checked = true;
+
+    this.setState({keyAgreement: "on", keyCertSign: "on"})
+
+
+  } else if(e.target.value === "None") {
+
+  } else if(e.target.value === "DED") {
+    document.getElementsByName("digitalSignarute")[0].checked = true;
+    this.setState({digitalSignarute: "on"})
+
+    document.getElementsByName("keyEncipherment")[0].checked = true;
+    this.setState({keyEncipherment: "on"})
+
+    document.getElementsByName("dataEnicipherment")[0].checked = true;
+    this.setState({dataEnicipherment: "on"})
+  }
+
+}
+
 renderCommonNames(){
   return(
       this.state.allCAs.map(dto => {
@@ -215,7 +278,6 @@ handleExtendedChangeChecked(e){
  }
 
 }
-
 
 
 
@@ -328,6 +390,17 @@ handleExtendedChangeChecked(e){
             </Card.Header>
             <Accordion.Collapse eventKey="2">
               <Card.Body>
+
+              <Card style={{ backgroundColor: 'rgba(99, 107, 110, 0.6)', marginTop: '5%', width: '50%', marginLeft: '-0.1%', marginBottom: '2%', padding: '15px' }}>
+                    <Card.Title style={{ color: 'white' }}>Choose Template:</Card.Title>
+                    <select className="selectD" defaultValue="None" onChange={this.handleSelectTemplate}>
+                      <option value="None">None</option>
+                      <option value="DigitalAndKeyE">Digital Certificate and Key Encipherment</option>
+                      <option value="OnlyDigital">Only Digital Certificate</option>
+                      <option value="KK">Key Agreement and KeyCertSign</option>
+                      <option value="DED">Digital Certificate, Key Encipherment and Data Enicipherment</option>
+                    </select>
+                  </Card>
 
                 <Card style={{backgroundColor: 'rgba(99, 107, 110, 0.6)'}}>
 
@@ -458,6 +531,10 @@ handleExtendedChangeChecked(e){
 
 
                   </Card>
+
+                
+
+                  
 
                 </Card>
 
