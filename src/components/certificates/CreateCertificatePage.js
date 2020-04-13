@@ -183,6 +183,12 @@ handleSelectSubjectType(e){
   console.log(e.target.value)
   this.setState({subjectType : e.target.value})
 
+  if(e.target.value === "ENDENTITY"){
+    document.getElementsByName('endExtension')[0].style.display = 'block';
+  } else {
+    document.getElementsByName('endExtension')[0].style.display = 'none';
+  }
+
 }
 
 handleSelectTemplate(e){
@@ -391,7 +397,7 @@ handleExtendedChangeChecked(e){
             <Accordion.Collapse eventKey="2">
               <Card.Body>
 
-              <Card style={{ backgroundColor: 'rgba(99, 107, 110, 0.6)', marginTop: '5%', width: '50%', marginLeft: '-0.1%', marginBottom: '2%', padding: '15px' }}>
+              <Card style={{ backgroundColor: 'rgba(99, 107, 110, 0.6)', marginTop: '3%', width: '50%', marginLeft: '-0.1%', marginBottom: '2%', padding: '15px' }}>
                     <Card.Title style={{ color: 'white' }}>Choose Template:</Card.Title>
                     <select className="selectD" defaultValue="None" onChange={this.handleSelectTemplate}>
                       <option value="None">None</option>
@@ -402,9 +408,18 @@ handleExtendedChangeChecked(e){
                     </select>
                   </Card>
 
+                  <Card style={{backgroundColor: 'rgba(99, 107, 110, 0.6)', marginTop: '3%',marginBottom: '3%', width: '50%', marginLeft: '0' ,padding:'15px'}}>
+                  <Card.Title style={{color:'white'}}>Subject Type:</Card.Title>
+                  <select className="selectD" defaultValue="None" onChange={this.handleSelectSubjectType}>
+                    <option value="CA">CA</option>
+                    <option value="ENDENTITY" >End-Entity</option>
+                  </select>
+
+                  </Card>
+
                 <Card style={{backgroundColor: 'rgba(99, 107, 110, 0.6)'}}>
 
-                  <Card style={{ textAlign: 'left', width: '50%', marginLeft: '5%', marginTop: '2%',backgroundColor: 'rgba(99, 107, 110, 0.6)', padding: '10px 10px' }}>
+                  <Card style={{ textAlign: 'left', width: '50%', marginLeft: '5%', marginTop: '2%', marginBottom: '2%', backgroundColor: 'rgba(99, 107, 110, 0.6)', padding: '10px 10px' }}>
                     <div style={{padding:'3px 8px', backgroundColor: 'rgb(69, 69, 69)'}}>
                     <label style={{color:'white'}}>Extensions: </label>
                     <label style={{ marginTop: '2%',color:'white' }}><b>Key usage</b></label>
@@ -472,7 +487,7 @@ handleExtendedChangeChecked(e){
                     </div>
                     </div>
 
-                    <div style={{padding:'3px 8px',marginTop:'3%', backgroundColor: 'rgb(69, 69, 69)'}}>
+                    <div name="endExtension" style={{padding:'3px 8px',marginTop:'3%', backgroundColor: 'rgb(69, 69, 69)', display: 'none'}}>
 
                     <label style={{ marginTop: '2%',color:'white' }}><b>Extended Key usage</b></label>
 
@@ -517,24 +532,7 @@ handleExtendedChangeChecked(e){
                     </div>
                     </div>
 
-
-
-                  </Card>
-
-                  <Card style={{backgroundColor: 'rgba(99, 107, 110, 0.6)', marginTop: '5%', width: '50%', marginLeft: '5%', marginBottom: '2%' ,padding:'15px'}}>
-                  <Card.Title style={{color:'white'}}>Subject Type:</Card.Title>
-                  <select className="selectD" defaultValue="None" onChange={this.handleSelectSubjectType}>
-                    <option value="CA">CA</option>
-                    <option value="ENDENTITY" >End-Entity</option>
-                  </select>
-
-
-
-                  </Card>
-
-                
-
-                  
+                  </Card>               
 
                 </Card>
 
