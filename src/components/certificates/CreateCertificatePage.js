@@ -389,6 +389,7 @@ handleExtendedChangeChecked(e){
 
               </Card.Body>
             </Accordion.Collapse>
+
           </Card>
 
           <Card style={{backgroundColor: 'rgba(99, 107, 110, 0.6)'}}>
@@ -537,11 +538,12 @@ handleExtendedChangeChecked(e){
 
 
                 </Card>
-
+                </Card>
                 <Button onClick={this.validateSubjectFields} variant="light" style={{ marginBottom: '3%', width: '200px', align: 'center', marginTop: '5%' }}>Issue Certificate</Button>
-              </Card.Body>
+                </Card.Body>
             </Accordion.Collapse>
           </Card>
+
         </Accordion>
       </div>
 
