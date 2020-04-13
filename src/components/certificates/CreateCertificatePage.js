@@ -87,6 +87,7 @@ class CreateCertificatePage extends React.Component {
           nonRepudiation: this.state.nonRepudiation,
           encipherOnly: this.state.encipherOnly,
           decipherOnly : this.state.decipherOnly,
+          isCriticalKeyUsage: this.state.isCriticalKeyUsage,
         }
 
         var extendedKeyUsageDto = {
@@ -95,16 +96,18 @@ class CreateCertificatePage extends React.Component {
           codeSigning: this.state.codeSigning,
           emailProtection:this.state.emailProtection,
           timeStamping: this.state.timeStamping,
+          isCriticalExtendedKeyUsage: this.state.isCriticalExtendedKeyUsage,
+
         }
 
-        var ExstensionsDto = {
+        var exstensionsDto = {
           keyUsageDto: keyUsageDto,
           extendedKeyUsageDto : extendedKeyUsageDto,
         }
 
         var object = {commonName: this.state.commonName, state: this.state.state, city: this.state.city,
         email: this.state.email, organization: this.state.organization, organizationUnit :  this.state.organizationUnit,
-        issuerSerialNumber: this.state.issuerSerialNumber, subjectType :  this.state.subjectType, ExstensionsDto: ExstensionsDto}
+        issuerSerialNumber: this.state.issuerSerialNumber, subjectType :  this.state.subjectType, exstensionsDto: exstensionsDto}
 
       axios.post("http://localhost:8081/api/certificates/save", object).then(
         (resp) => this.onSuccessHandler(resp),
@@ -408,7 +411,7 @@ handleExtendedChangeChecked(e){
                     <div style={{padding:'3px 8px', backgroundColor: 'rgb(69, 69, 69)'}}>
                     <label style={{color:'white'}}>Extensions: </label>
                     <label style={{ marginTop: '2%',color:'white' }}><b>Key usage</b></label>
-                    <Form.Check 
+                    <Form.Check
                         type="switch"
                         id="custom-switch"
                         label=" is Critical"
@@ -476,7 +479,7 @@ handleExtendedChangeChecked(e){
 
                     <label style={{ marginTop: '2%',color:'white' }}><b>Extended Key usage</b></label>
 
-                    <Form.Check 
+                    <Form.Check
                         type="switch"
                         id="custom-switch2"
                         label=" is Critical"
@@ -532,9 +535,9 @@ handleExtendedChangeChecked(e){
 
                   </Card>
 
-                
 
-                  
+
+
 
                 </Card>
 
