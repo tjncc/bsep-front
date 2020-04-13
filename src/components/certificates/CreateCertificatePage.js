@@ -330,8 +330,8 @@ renderCommonNames(){
 
                 <Card style={{backgroundColor: 'rgba(99, 107, 110, 0.6)'}}>
 
-                  <Card style={{ textAlign: 'left', width: '50%', marginLeft: '5%', marginTop: '2%',backgroundColor: 'rgba(99, 107, 110, 0.6)', padding: '3px 10px' }}>
-                    <div style={{border:'1px solid black',padding:'3px 4px'}}>
+                  <Card style={{ textAlign: 'left', width: '50%', marginLeft: '5%', marginTop: '2%',backgroundColor: 'rgba(99, 107, 110, 0.6)', padding: '10px 10px' }}>
+                    <div style={{padding:'3px 8px', backgroundColor: 'rgb(69, 69, 69)'}}>
                     <label style={{color:'white'}}>Extensions:</label>
                     <label style={{ marginTop: '2%',color:'white' }}><b>Key usage</b></label>
 
@@ -391,7 +391,7 @@ renderCommonNames(){
                     </div>
                     </div>
 
-                    <div style={{border:'1px solid black',padding:'3px 4px',marginTop:'2%'}}>
+                    <div style={{padding:'3px 8px',marginTop:'3%', backgroundColor: 'rgb(69, 69, 69)'}}>
 
                     <label style={{ marginTop: '2%',color:'white' }}><b>Extended Key usage</b></label>
 
