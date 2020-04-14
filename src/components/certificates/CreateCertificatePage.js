@@ -100,10 +100,11 @@ class CreateCertificatePage extends React.Component {
 
         }
 
-        var exstensionsDto = {
+        var exstensionsDto={
           keyUsageDto: keyUsageDto,
-          extendedKeyUsageDto : extendedKeyUsageDto,
+          extendedKeyUsageDto :  extendedKeyUsageDto,
         }
+
 
         var object = {commonName: this.state.commonName, state: this.state.state, city: this.state.city,
         email: this.state.email, organization: this.state.organization, organizationUnit :  this.state.organizationUnit,
@@ -260,7 +261,7 @@ renderCommonNames(){
       this.state.allCAs.map(dto => {
         console.log(dto);
           return(
-              <option style={{color:'white'}} value={dto.serialNumber}>{dto.commonName + " " + dto.serialNumber}</option>
+              <option style={{color:'black'}} value={dto.serialNumber}>{dto.commonName + " " + dto.serialNumber}</option>
           )
       })
   )
@@ -379,7 +380,7 @@ handleExtendedChangeChecked(e){
               <Card.Body>
 
                 <Card variant="outline-primary" style={{ padding: '15px',backgroundColor: 'rgba(99, 107, 110, 0.6)' }}>
-                  <label style={{color:'white'}}>Currently avaliable CA:</label>
+                  <label style={{color:'black'}}>Currently avaliable CA:</label>
                   <select className="selectD" defaultValue="None" onChange={this.handleSelect}>
                     <option value="None">None</option>
                     {this.renderCommonNames()}
