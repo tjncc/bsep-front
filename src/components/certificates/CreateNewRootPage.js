@@ -30,7 +30,8 @@ class CreateCertificatePage extends React.Component {
     this.validateSubjectFields = this.validateSubjectFields.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.handleSelectSubjectType = this.handleSelectSubjectType.bind(this);
-
+    this.handleKeyUsage = this.handleKeyUsage.bind(this);
+    this.handleChangeChecked = this.handleChangeChecked.bind(this);
 
     this.state = {
 
@@ -43,6 +44,16 @@ class CreateCertificatePage extends React.Component {
       serialNumber:'',
       certificateRole:'',
       subjectType: 'CA',
+      digitalSignarute:'',
+      keyEncipherment:'',
+      dataEnicipherment:'',
+      keyAgreement:'',
+      keyCertSign:'',
+      crlSign:'',
+      nonRepudiation:'',
+      encipherOnly:'',
+      decipherOnly:'',
+      isCriticalKeyUsage: '',
 
     }
 
@@ -57,9 +68,27 @@ class CreateCertificatePage extends React.Component {
 
         console.log(this.state);
 
+        var keyUsageDto = {
+          digitalSignarute: this.state.digitalSignarute,
+          keyEncipherment: this.state.keyEncipherment,
+          dataEnicipherment: this.state.dataEnicipherment,
+          keyAgreement: this.state.keyAgreement,
+          keyCertSign: this.state.keyCertSign,
+          crlSign: this.state.crlSign,
+          nonRepudiation: this.state.nonRepudiation,
+          encipherOnly: this.state.encipherOnly,
+          decipherOnly : this.state.decipherOnly,
+          isCriticalKeyUsage: this.state.isCriticalKeyUsage,
+        }
+
+        var exstensionsDto = {
+          keyUsageDto: keyUsageDto,
+
+        }
+
         var object = {commonName: this.state.commonName, state: this.state.state, city: this.state.city,
         email: this.state.email, organization: this.state.organization, organizationUnit :  this.state.organizationUnit,
-        subjectType :  this.state.subjectType}
+        subjectType :  this.state.subjectType,exstensionsDto: exstensionsDto}
 
       axios.post("http://localhost:8081/api/certificates/saveroot", object).then(
         (resp) => {
@@ -94,6 +123,28 @@ class CreateCertificatePage extends React.Component {
         button: true
       });
     }
+  }
+
+  handleKeyUsage(e){
+    console.log(document.getElementsByName(e.target.name));
+    if(document.getElementsByName(e.target.name)[0].checked === true){
+     this.setState({ ...this.state, [e.target.name]: e.target.value });
+   }else{
+    document.getElementsByName(e.target.name)[0].checked = false;
+    this.setState({ ...this.state, [e.target.name]: "" });
+   }
+
+  }
+
+  handleChangeChecked(e){
+
+    if(document.getElementsByName(e.target.name)[0].checked === true){
+     this.setState({ ...this.state, [e.target.name]: e.target.value });
+   }else{
+    document.getElementsByName(e.target.name)[0].checked = false;
+    this.setState({ ...this.state, [e.target.name]: "" });
+   }
+
   }
 
   onErrorHandler(resp) {
@@ -150,6 +201,7 @@ handleSelectSubjectType(e){
 
   render() {
 
+console.log(this.state);
 
     return (
 
@@ -206,12 +258,88 @@ handleSelectSubjectType(e){
                     <Form.Control placeholder="Enter email" type="email" name="email" onChange={this.handleChange} required />
                   </Form.Group>
 
+                  <Card style={{backgroundColor: 'rgba(99, 107, 110, 0.6)'}}>
+
+                    <Card style={{ textAlign: 'left', width: '50%', marginLeft: '5%', marginTop: '2%', marginBottom: '2%', backgroundColor: 'rgba(99, 107, 110, 0.6)', padding: '10px 10px' }}>
+                      <div style={{padding:'3px 8px', backgroundColor: 'rgb(69, 69, 69)'}}>
+                      <label style={{color:'white'}}>Extensions: </label>
+                      <label style={{ marginTop: '2%',color:'white' }}><b>Key usage</b></label>
+                      <Form.Check
+                          type="switch"
+                          id="custom-switch"
+                          label=" is Critical"
+                          onChange={this.handleChangeChecked}
+                          className="formCheckA"
+                          name="isCriticalKeyUsage"
+                        />
+                      <div>
+                        <input type="checkbox" name="digitalSignarute" onChange={this.handleKeyUsage}></input>
+          &nbsp;
+          <label style={{color:'white'}}>Digital Signature</label>
+                      </div>
+
+                      <div>
+                        <input type="checkbox" name="nonRepudiation" onChange={this.handleKeyUsage}></input>
+          &nbsp;
+          <label style={{color:'white'}}>Non Repudiation</label>
+                      </div>
+
+                      <div>
+                        <input type="checkbox" name="keyEncipherment" onChange={this.handleKeyUsage}></input>
+          &nbsp;
+          <label style={{color:'white'}}>Key Encipherment </label>
+                      </div>
+
+                      <div>
+                        <input type="checkbox" name="dataEnicipherment" onChange={this.handleKeyUsage} ></input>
+          &nbsp;
+          <label style={{color:'white'}}>Data Encipherment </label>
+                      </div>
+
+                      <div>
+                        <input type="checkbox" name="keyAgreement" onChange={this.handleKeyUsage}></input>
+          &nbsp;
+          <label style={{color:'white'}}>Key Agreement</label>
+                      </div>
+
+                      <div>
+                        <input type="checkbox" name="keyCertSign" onChange={this.handleKeyUsage}></input>
+          &nbsp;
+          <label style={{color:'white'}}>Key CertSign</label>
+                      </div>
+
+                      <div>
+                        <input type="checkbox" name="crlSign" onChange={this.handleKeyUsage}></input>
+          &nbsp;
+          <label style={{color:'white'}}>CRL Sign</label>
+                      </div>
+
+
+                      <div>
+                        <input type="checkbox" name="encipherOnly" onChange={this.handleKeyUsage}></input>
+          &nbsp;
+          <label style={{color:'white'}}>EncipherOnly</label>
+                      </div>
+
+                      <div>
+                        <input type="checkbox" name="decipherOnly" onChange={this.handleKeyUsage}></input>
+          &nbsp;
+          <label style={{color:'white'}}>DecipherOnly</label>
+                      </div>
+                      </div>
+                      </Card>
+                      </Card>
+
+
+
                   <Card style={{backgroundColor: 'rgba(61, 58, 58, 0.6)'}} >
                   <Card.Body>
                   <img src={tips} style={{width:'30px',height:'30px',padding:'4px'}}></img>
                   <label style={{color:'white'}}>Because this is a root certificate only subject data is needed.</label>
                   </Card.Body>
                   </Card>
+
+
                   <Accordion.Toggle as={Button} variant="light" eventKey="1" style={{ marginRight: '93%',width:'200px',marginTop:'12px' }} onClick={this.validateSubjectFields} >Issue root certificate</Accordion.Toggle>
                 </Form>
 
