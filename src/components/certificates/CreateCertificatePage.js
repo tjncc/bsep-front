@@ -380,7 +380,7 @@ handleExtendedChangeChecked(e){
               <Card.Body>
 
                 <Card variant="outline-primary" style={{ padding: '15px',backgroundColor: 'rgba(99, 107, 110, 0.6)' }}>
-                  <label style={{color:'black'}}>Currently avaliable CA:</label>
+                  <label style={{color:'white'}}>Currently avaliable CA:</label>
                   <select className="selectD" defaultValue="None" onChange={this.handleSelect}>
                     <option value="None">None</option>
                     {this.renderCommonNames()}
