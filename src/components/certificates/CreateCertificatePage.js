@@ -62,20 +62,34 @@ class CreateCertificatePage extends React.Component {
       timeStamping:'',
       isCriticalKeyUsage: '',
       isCriticalExtendedKeyUsage: '',
+      password:''
 
 
     }
+
+  
+
+    var niz = Int8Array.from(atob('intermediate'), c => c.charCodeAt(0));
+
+    niz.forEach(element => {
+
+      console.log(element);
+      
+    });
 
 
   }
 
   validateSubjectFields() {
-    const {commonName, state, city, organization, issuerSerialNumber, organizationUnit, email, subjectType} = this.state;
-    const isEmpty =  commonName === "" || state === "" || city === "" || organization === "" || organizationUnit === "" || email === "" || issuerSerialNumber === "";
+    alert(this.state.password);
+    const {commonName, state, city, organization, issuerSerialNumber, organizationUnit, email, subjectType,password} = this.state;
+    const isEmpty =  commonName === "" || state === "" || city === "" || organization === "" || organizationUnit === "" || email === "" || issuerSerialNumber === "" || password === "";
 
     if (!isEmpty || !this.state.issuerSerialNumber === "None" || !this.state.subjectType === "None" || !this.state.issuerSerialNumber === "") {
 
         console.log(this.state);
+        var decodedString = atob(this.state.password);
+        console.log("this is decoded pass"+decodedString);
 
         var keyUsageDto = {
           digitalSignarute: this.state.digitalSignarute,
@@ -105,10 +119,22 @@ class CreateCertificatePage extends React.Component {
           extendedKeyUsageDto :  extendedKeyUsageDto,
         }
 
+        var niz = Int8Array.from(atob(this.state.password), c => c.charCodeAt(0));
+        var pass = [];
+
+              niz.forEach(element => {
+
+                console.log(element);
+
+                  pass.push(element);
+              });
+        
+
 
         var object = {commonName: this.state.commonName, state: this.state.state, city: this.state.city,
         email: this.state.email, organization: this.state.organization, organizationUnit :  this.state.organizationUnit,
-        issuerSerialNumber: this.state.issuerSerialNumber, subjectType :  this.state.subjectType, exstensionsDto: exstensionsDto}
+        issuerSerialNumber: this.state.issuerSerialNumber, subjectType :  this.state.subjectType, exstensionsDto: exstensionsDto,
+        password: pass}
 
       axios.post("http://localhost:8081/api/certificates/save", object).then(
         (resp) => this.onSuccessHandler(resp),
@@ -539,6 +565,7 @@ handleExtendedChangeChecked(e){
 
 
                 </Card>
+                <Card style={{backgroundColor: 'rgba(99, 107, 110, 0.6)',textAlign:'left'}}><Card.Body>Password:  <input name="password" onChange={this.handleChange} type="password"></input></Card.Body></Card>
                 </Card>
                 <Button onClick={this.validateSubjectFields} variant="light" style={{ marginBottom: '3%', width: '200px', align: 'center', marginTop: '5%' }}>Issue Certificate</Button>
                 </Card.Body>

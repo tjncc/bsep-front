@@ -54,6 +54,7 @@ class CreateCertificatePage extends React.Component {
       encipherOnly:'',
       decipherOnly:'',
       isCriticalKeyUsage: '',
+      password:''
 
     }
 
@@ -61,8 +62,8 @@ class CreateCertificatePage extends React.Component {
   }
 
   validateSubjectFields() {
-    const {commonName, state, city, organization, organizationUnit, email, subjectType} = this.state;
-    const isEmpty =  commonName === "" || state === "" || city === "" || organization === "" || organizationUnit === "" || email === "";
+    const {commonName, state, city, organization, organizationUnit, email, subjectType,password} = this.state;
+    const isEmpty =  commonName === "" || state === "" || city === "" || organization === "" || organizationUnit === "" || email === "" || password === "";
 
     if (!isEmpty ||  !this.state.subjectType === "None") {
 
@@ -86,9 +87,20 @@ class CreateCertificatePage extends React.Component {
 
         }
 
+        var niz = Int8Array.from(atob(this.state.password), c => c.charCodeAt(0));
+        var pass = [];
+
+              niz.forEach(element => {
+
+                console.log(element);
+
+                  pass.push(element);
+              });
+        
+
         var object = {commonName: this.state.commonName, state: this.state.state, city: this.state.city,
         email: this.state.email, organization: this.state.organization, organizationUnit :  this.state.organizationUnit,
-        subjectType :  this.state.subjectType,exstensionsDto: exstensionsDto}
+        subjectType :  this.state.subjectType,exstensionsDto: exstensionsDto, password: pass}
 
       axios.post("http://localhost:8081/api/certificates/saveroot", object).then(
         (resp) => {
@@ -338,7 +350,7 @@ console.log(this.state);
                   <label style={{color:'white'}}>Because this is a root certificate only subject data is needed.</label>
                   </Card.Body>
                   </Card>
-
+                  <Card style={{backgroundColor: 'rgba(99, 107, 110, 0.6)',textAlign:'left'}}><Card.Body>Password:  <input name="password" onChange={this.handleChange} type="password"></input></Card.Body></Card>
 
                   <Accordion.Toggle as={Button} variant="light" eventKey="1" style={{ marginRight: '93%',width:'200px',marginTop:'12px' }} onClick={this.validateSubjectFields} >Issue root certificate</Accordion.Toggle>
                 </Form>
