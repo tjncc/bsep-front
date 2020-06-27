@@ -81,7 +81,7 @@ class CreateCertificatePage extends React.Component {
   }
 
   validateSubjectFields() {
-    alert(this.state.password);
+    
     const {commonName, state, city, organization, issuerSerialNumber, organizationUnit, email, subjectType,password} = this.state;
     const isEmpty =  commonName === "" || state === "" || city === "" || organization === "" || organizationUnit === "" || email === "" || issuerSerialNumber === "" || password === "";
 
